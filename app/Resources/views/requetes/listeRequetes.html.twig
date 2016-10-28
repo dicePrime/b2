@@ -1,0 +1,165 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %} 
+    <link href="{{ asset('css/jquery.dataTables.css') }}" rel="stylesheet" type="text/css" />
+    {{ parent() }}
+    <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/buttons.dataTables.min.css') }}" />
+{% endblock %}
+
+{% block contenu %}
+    <div style='padding-top:50px;'>
+        <form class="form form-horizontal">
+            <fieldset>
+                <legend>Options de recherche</legend>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-2 control-label">Date début</label>
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="input-group date" id="debut">
+                            <input type="text" class="form-control" id="dateDebut" name="dateDebut"
+                                   value={{ app.request.get('dateDebut') }}required/>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                    </div>
+                    <label class="col-xs-12 col-sm-2 control-label">Date Fin</label>
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="input-group date" id="fin">
+                            <input type="text" class="form-control" id="dateFin" name="dateFin" 
+                                   value = {{ app.request.get('dateFin') }} required/>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-2 control-label">Numéro Ticket</label>
+                    <div class="col-xs-12 col-sm-4">                        
+                        <input type="text" class="form-control" id="numeroTicket" name="numeroTicket"
+                               value = {{ app.request.get('numeroTicket')  }} />
+                    </div>
+
+                    <label class="col-xs-12 col-sm-2 control-label">Compte Client</label>
+                    <div class="col-xs-12 col-sm-4">
+                        <input type="text" class="form-control" id="compteClient" name="compteClient"
+                               value="{{ app.request.get('compteClient') }}"/>
+                    </div>
+                </div>  
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-2 control-label">Opération</label>
+                    <div class="col-xs-12 col-sm-4">                        
+                        <select class="form-control" id="operation" class="operation" name="operation"
+                                value="{{ app.request.get('operation') }}">
+                            <option value=""></option>
+                            {% for operation in app.session.get('listeOperations') %}
+                                <option value="{{ operation.libelle }}">{{ operation.libelle }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <label class="col-xs-12 col-sm-2 control-label">Etat</label>
+                    <div class="col-xs-12 col-sm-4">
+                        <select class="form-control" id="etat" class="etat" name="etat" value="{{ app.request.get('etat') }}">
+                            <option value=""></option>
+                            {% for etat in app.session.get('etats') %}
+                                <option value="{{ etat }}">{{ etat }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-2 control-label">Nom Client</label>
+                    <div class="col-xs-12 col-sm-4">                        
+                        <input type="text" class="form-control" id="nomClient" name="nomClient"
+                               value="{{ app.request.get('nomClient') }}"/>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-sm-offset-2">                        
+                        <input type="submit" class="btn btn-block orangeElement" style="color:white" value="Afficher"/>
+                    </div>
+                </div>
+
+            </fieldset>
+
+        </form>
+
+        <div class="row" style="padding-top:50px;">
+            <div class="col-xs-12">
+                <table class="table table-bordered table-condensed table-striped toDataTable" style="font-size:90%">
+                    <thead class="orangeElement" style="color:white">
+                        <tr>
+                            <th>Afficher</th><th>Editer</th>
+                            <th>Date reception<th>Ticket</th>
+                            <th>Compte</th><th>Client</th><th>Opération</th>
+                            <th>Statut</th><th>Initiateur</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for requete in requetes %}
+                            <tr>
+                                <td><a href="#"><span class="glyphicon glyphicon-eye-open" title="Afficher"></span></a></td>
+                                <td><a href="#"><span class="glyphicon glyphicon-edit" title ="Editer"></span></a></td>
+                                <td>{{ requete.dateReception }}</td><td>{{ requete.numeroTicket }}</td>
+                                <td>{{ requete.compteClient }}</td><td>{{ requete.nomClient }}</td>
+                                <td>{{ requete.operation }}</td><td>{{ requete.statut }}</td>
+                                <td>{{ requete.initiateur }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block scripts %}
+        {{ parent() }}
+        <script src="{{ asset('js/moment.js') }}"></script>
+        <script src="{{ asset('js/bootstrap-datetimepicker.js') }}"></script>      
+        <script src="{{ asset('js/jquery.dataTables.js') }}" type="text/javascript"></script> 
+        <script src="{{ asset('js/dataTables.tableTools.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/dataTables.buttons.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/buttons.flash.min.js') }}" type="text/javascript"></script> 
+        <script>
+            $(document).ready(function () {
+
+                $('#debut').datetimepicker({
+                    format: 'YYYY-MM-DD HH:mm:ss',
+                    locale: 'fr'
+                }
+                );
+                $('#fin').datetimepicker({
+                    useCurrent: false,
+                    format: 'YYYY-MM-DD HH:mm:ss',
+                    locale: 'fr'
+                }
+                );
+                $("#debut").on("dp.change", function (e) {
+                    $('#fin').data("DateTimePicker").minDate(e.date);
+                });
+                $("#fin").on("dp.change", function (e) {
+                    $('#debut').data("DateTimePicker").maxDate(e.date);
+                });
+
+                //On rend le menu Listing CA actif
+                $("#listingCA").addClass('active');
+                //On associe au bouton rechercher la fonction qui 
+                // est chargée de raffraichir le tableau
+
+
+                /**
+                 * La fonction suivante recharge le tableau
+                 * 
+                 * @returns {undefined}
+                 */
+                $('.toDataTable').dataTable({
+                    dom: 'Blfrtip',
+                    buttons: [
+                        'excel'
+                    ],
+                    swfPath: '../swf/copy_csv_xls.swf',
+                    mColumns: 'visible'
+                });
+
+            });
+
+
+        </script>
+    {% endblock %}

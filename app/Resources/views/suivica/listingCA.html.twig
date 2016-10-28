@@ -1,0 +1,157 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}         
+    {{ parent() }}
+    <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('jtable/themes/lightcolor/orange/jtable.css') }}"  rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block contenu %}
+    <div style='padding-top:50px;'>
+        <div class="form">
+            <fieldset>
+                <legend>Paramètres de recherche</legend>
+
+                <div class="form-group">
+                    <label class="col-xs-2 control-label">PERIODE ENTRE</label>
+                    <div class="col-xs-2">
+                        <select class="form-control" id="periodeDebut" name="periodeDebut">
+                            <option value="-">-</option>
+                            {% for periodeListing in periodes %}
+                                <option value="{{ periodeListing }}">{{ periodeListing }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <label class="col-xs-1 control-label">Et</label>
+                    <div class="col-xs-2">
+                        <select class="form-control" id="periodeFin" name="periodeFin">
+                            <option value="-">-</option>
+                            {% for periodeListing in periodes %}
+                                <option value="{{ periodeListing }}">{{ periodeListing }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-xs-3 ">
+                        <input type="submit" id="btnRechercher" class="btn btn-block orangeElement" style="background-color:rgb(255,101,1);color:white" value="RECHERCHER"/>
+                    </div>
+
+                </div>
+
+            </fieldset>
+
+        </div>
+
+        <div class="row" style="padding-top:50px;">
+            <div class="col-xs-12">
+                <div id="listingCAContainer">
+
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block scripts %}
+        {{ parent() }}
+        <script src="{{ asset('js/moment.js') }}"></script>
+        <script src="{{ asset('jtable/jquery.jtable.min.js') }}" type="text/javascript"></script>
+        <script>
+            $(document).ready(function () {
+
+                init();
+                //On rend le menu Listing CA actif
+                $("#listingCA").addClass('active');
+                //On associe au bouton rechercher la fonction qui 
+                // est chargée de raffraichir le tableau
+
+                $("#btnRechercher").bind('click', function () {
+
+                    init();
+                    $('#listingCAContainer').jtable('load');
+                });
+                /**
+                 * La fonction suivante recharge le tableau
+                 * 
+                 * @returns {undefined}
+                 */
+                function init()
+                {
+
+
+                    $("#listingCAContainer").jtable({
+                        title: 'Listing CA',
+                        paging: true,
+                        pageSize: 10,
+                        sorting: true,
+                        defaultSorting: 'periode ASC',
+                        actions:
+                                {
+                                    listAction: function (postData, jtParams) {
+                                        console.log("Loading from custom function...");
+                                        return $.Deferred(function ($dfd) {
+                                            $.ajax({
+                                                url: Routing.generate('list_ca'),
+                                                type: 'POST',
+                                                dataType: 'json',
+                                                data: {'jstStartindex': jtParams.jtStartIndex,
+                                                    'jtPageSize': jtParams.jtPageSize,
+                                                    'jtSorting': jtParams.jtSorting,
+                                                    'debut': $("#periodeDebut").val(),
+                                                    'fin': $("#periodeFin").val()},
+                                                success: function (data) {
+                                                    console.log(data);
+                                                    $dfd.resolve(data);
+                                                },
+                                                error: function () {
+                                                    $dfd.reject();
+                                                }
+                                            });
+                                        });
+                                    }
+                                },
+                        toolbar: {
+                            items: [{
+                                    tooltip: 'Exportez ce tableau sous excel',
+                                    icon: "{{ asset('img/excel.png') }}",
+                                    text: 'Export to Excel',
+                                    click: function () {
+                                        
+                                        var route = Routing.generate('create_excel', 
+                                        {'debut': $("#periodeDebut").val(),
+                                                'fin': $("#periodeFin").val()} );
+                                        
+                                        window.location = route;
+                                    
+                                    }
+                                }]
+                        },
+                        fields: {
+                            periode: {
+                                title: 'Periode',
+                                sorting: true,
+                                key: true
+                            },
+                            client: {
+                                title: 'Client'
+                            },
+                            compte: {
+                                title: 'Compte',
+                                sorting: false
+                            },
+                            ca: {
+                                title: 'CA',
+                                sorting: true
+                            },
+                            commercial: {
+                                title: 'Commercial',
+                                sorting: true
+                            }
+                        }
+
+                    });
+                }
+            });
+
+
+
+        </script>
+    {% endblock %}

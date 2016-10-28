@@ -1,0 +1,55 @@
+logout:
+    path: /logout
+    defaults: {_controller:AppBundle:Default:logout }
+
+login:
+    path: /
+    defaults: { _controller:AppBundle:Default:login }
+
+homepage:
+    path: /home
+    defaults: { _controller:AppBundle:Default:homePage }
+
+
+details_hebdo:
+    path: /suivi_parc/details_hebdo
+    defaults: { _controller:AppBundle:DetailsHebdo:detailsHebdo }
+
+evolution_hebdo:
+    path: /evolution_hebdo
+    defaults: { _controller:AppBundle:EvolutionHebdo:evoultionHebdo }
+
+listing_ca:
+    path: /listing_ca
+    defaults: { _controller:AppBundle:SuiviCA:listingCA }
+    options:
+        expose: true
+
+list_ca:
+    path: /list_ca
+    defaults: { _controller:AppBundle:SuiviCA:listCA }
+    options:
+        expose: true
+        
+create_excel:
+    path: /create_excel/{debut}/{fin}
+    defaults: { _controller:AppBundle:SuiviCA:createExcel }
+    options:
+        expose: true
+        
+## Gestion des requetes
+
+listing_requetes:
+    path: /requetes/listing
+    defaults: { _controller:AppBundle:ListingRequetes:listingRequetes }
+    options:
+        expose: true
+        
+        
+        
+## REST API
+
+get_b2b_requetes:
+    path: /b2b_requetes/{minDate}/{numeroTicket}/{compteClient}/{nomClient}/{operation}
+    #default: { _co
+  

@@ -1,0 +1,89 @@
+{% extends '::base.html.twig' %}
+
+{% block contenu %}
+    {#<form class="form well">
+        <fieldset>
+            <legend>Paramètres de recherche</legend>
+
+            <div class="form-group">
+                <label class="col-xs-3">NUMERO COMPTE</label>
+                <div class="col-xs-3">
+                    <select class="form-control" id="numeroCompte" name="numeroCompte">
+                        <option value="">TOUS LES COMPTES</option>
+                        {% for numeroCompte in numerosComptes %}
+                            <option value="{{ numeroCompte }}"
+                                    {% if numeroComptePrecedent == numeroCompte %} selected {% endif %}>{{ numeroCompte|upper }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <label class="col-xs-3">ANNEE</label>
+                <div class="col-xs-3">
+                    <input class="form-control" name="annee" id ="annee"/>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3">SEMAINE ENTRE</label>
+                <div class="col-xs-3">
+                    <input class="form-control" type="number" value="{{ semaineDebutPrecedente }}" id="semaineDebut" name="semaineDebut"/>
+                </div>
+                <label class="col-xs-3">Et</label>
+                <div class="col-xs-3">
+                    <input class="form-control" type="number" value="{{ semaineFinPrecedente }}" id="semaineFin" name="semaineFin"/>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3">INTITULE DU COMPTE SEMBLABLE A</label>
+                <div class="col-xs-3">
+                    <input type="text" class="form-control" id="intituleCompte" value="{{ intituleComptePrecedent }}" name="intituleCompte"/>
+                </div>
+                <div class="col-xs-3">
+                    <input type="submit" class="btn btn-block" value="RECHERCHER"/>
+                </div>
+
+            </div>
+
+        </fieldset>
+
+    </form>#}
+
+    <div class="row" style="padding-top:50px;">
+        <div class="col-xs-12">
+            <table class="table table-bordered table-condensed table-striped">
+                <thead>
+                    <tr>
+                        <th>ANNEE</th><th>SEM</th><th>CPTE</th><th>INTITULE</th>
+                        <th>FORMULE</th><th>TYPE</th><th>PARC</th><th>ACTIVATION</th>
+                        <th>SUSPENSION</th><th>RESILIATION</th><th>COMMERCIAL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for detailHebdo in detailsHebdo %}
+                    <tr>
+                        <td>{{ detailHebdo.annee }}</td><td>{{ detailHebdo.semaine }}</td>
+                        <td>{{ detailHebdo.custCode }}</td><td>{{ detailHebdo.intitule }}</td>
+                        <td>{{ detailHebdo.des }}</td><td>{{ detailHebdo.type1 }}</td>
+                        <td>{{ detailHebdo.cb1 }}</td><td>{{ detailHebdo.act1}}</td>
+                        <td>{{ detailHebdo.susp1 }}</td><td>{{ detailHebdo.deac1 }}</td>
+                        <td>{{ detailHebdo.nomVendeur }}</td>
+                    </tr>
+                {% endfor %}
+                <tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/highcharts.js') }}"></script>
+    <script src="{{ asset('js/exporting.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+        
+            $("#detailsHebdo").addClass('active');
+            });
+    </script>
+{% endblock %}

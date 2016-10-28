@@ -1,0 +1,56 @@
+{% extends '::base.html.twig' %}
+
+{% block contenu %}
+    <div style='padding-top:50px;'>
+        <div class="row">
+            <div class="col-xs-12" >
+                <div class='panel panel-default' style='border-color:#e67e22;border-width: 1px;'>
+                    <div class='panel-heading' style='background-color:#e67e22'>
+                        Evolution mensuelle comparée du CA ({{ "now"|date("Y") -2 }} VS {{ "now"|date("Y") -1 }} VS {{ "now"|date("Y") }})
+                    </div>
+                    <div class='panel-body'>
+                        <div id="mixedchart" style="min-width: 150px; height: 350px; margin: 0 auto"></div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6">
+                <div class='panel panel-warning'>
+                    <div class='panel-heading'>
+                        CA par année
+                    </div>
+                    <div class='panel-body'>
+                        <div id="columnchart" style="min-width: 150px; height: 350px; margin: 0 auto"></div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-xs-6">
+                <div class='panel panel-info'>
+                    <div class='panel-heading'>
+                        Parc par année
+                    </div>
+                    <div class='panel-body'>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/highcharts.js') }}"></script>
+    <script src="{{ asset('js/exporting.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            {{ chart(ca_by_years) }}
+            {{ chart(mixed_chart) }}
+            });
+    </script>
+{% endblock %}

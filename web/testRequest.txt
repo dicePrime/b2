@@ -1,0 +1,281 @@
+Symfony\Component\HttpFoundation\Request Object
+(
+    [attributes] => Symfony\Component\HttpFoundation\ParameterBag Object
+        (
+            [parameters:protected] => Array
+                (
+                    [_controller] => AppBundle\Controller\SuiviCAController::listCAAction
+                    [_route] => list_ca
+                    [_route_params] => Array
+                        (
+                        )
+
+                )
+
+        )
+
+    [request] => Symfony\Component\HttpFoundation\ParameterBag Object
+        (
+            [parameters:protected] => Array
+                (
+                    [jstStartindex] => 0
+                    [jtPageSize] => 5
+                    [jtSorting] => periode ASC
+                    [debut] => 201401
+                    [fin] => 201410
+                )
+
+        )
+
+    [query] => Symfony\Component\HttpFoundation\ParameterBag Object
+        (
+            [parameters:protected] => Array
+                (
+                )
+
+        )
+
+    [server] => Symfony\Component\HttpFoundation\ServerBag Object
+        (
+            [parameters:protected] => Array
+                (
+                    [HTTP_HOST] => localhost
+                    [HTTP_CONNECTION] => keep-alive
+                    [CONTENT_LENGTH] => 74
+                    [HTTP_ACCEPT] => application/json, text/javascript, */*; q=0.01
+                    [HTTP_ORIGIN] => http://localhost
+                    [HTTP_X_REQUESTED_WITH] => XMLHttpRequest
+                    [HTTP_USER_AGENT] => Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36
+                    [CONTENT_TYPE] => application/x-www-form-urlencoded; charset=UTF-8
+                    [HTTP_REFERER] => http://localhost/b2/web/app_dev.php/listing_ca
+                    [HTTP_ACCEPT_ENCODING] => gzip, deflate
+                    [HTTP_ACCEPT_LANGUAGE] => fr-FR,fr;q=0.8,en-US;q=0.6,en;q=0.4
+                    [HTTP_COOKIE] => jtable%23-108702001page-size=10; jtable%23-1765874512page-size=5; PHPSESSID=9dg2k2lhu0b1rti41uv94gmmk5
+                    [PATH] => C:\app\BMHB8456\product\11.2.0\dbhome_1\bin;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\idmu\common;C:\wamp\bin\php\php5.5.12;C:\ProgramData\ComposerSetup\bin;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files\R\R-3.3.1\bin;C:\Program Files (x86)\GnuWin32\bin;C:\Program Files\apache-ant-1.9.7\bin;C:\Program Files (x86)\NetMake\v81\components\php;C:\Users\BMHB8456\Documents\bin;
+                    [SystemRoot] => C:\Windows
+                    [COMSPEC] => C:\Windows\system32\cmd.exe
+                    [PATHEXT] => .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+                    [WINDIR] => C:\Windows
+                    [SERVER_SIGNATURE] => <address>Apache/2.4.9 (Win64) PHP/5.5.12 Server at localhost Port 80</address>
+
+                    [SERVER_SOFTWARE] => Apache/2.4.9 (Win64) PHP/5.5.12
+                    [SERVER_NAME] => localhost
+                    [SERVER_ADDR] => ::1
+                    [SERVER_PORT] => 80
+                    [REMOTE_ADDR] => ::1
+                    [DOCUMENT_ROOT] => C:/wamp/www/
+                    [REQUEST_SCHEME] => http
+                    [CONTEXT_PREFIX] => 
+                    [CONTEXT_DOCUMENT_ROOT] => C:/wamp/www/
+                    [SERVER_ADMIN] => admin@example.com
+                    [SCRIPT_FILENAME] => C:/wamp/www/b2/web/app_dev.php
+                    [REMOTE_PORT] => 61320
+                    [GATEWAY_INTERFACE] => CGI/1.1
+                    [SERVER_PROTOCOL] => HTTP/1.1
+                    [REQUEST_METHOD] => POST
+                    [QUERY_STRING] => 
+                    [REQUEST_URI] => /b2/web/app_dev.php/list_ca
+                    [SCRIPT_NAME] => /b2/web/app_dev.php
+                    [PATH_INFO] => /list_ca
+                    [PATH_TRANSLATED] => C:\wamp\www\list_ca
+                    [PHP_SELF] => /b2/web/app_dev.php/list_ca
+                    [REQUEST_TIME_FLOAT] => 1476789007.679
+                    [REQUEST_TIME] => 1476789007
+                )
+
+        )
+
+    [files] => Symfony\Component\HttpFoundation\FileBag Object
+        (
+            [parameters:protected] => Array
+                (
+                )
+
+        )
+
+    [cookies] => Symfony\Component\HttpFoundation\ParameterBag Object
+        (
+            [parameters:protected] => Array
+                (
+                    [jtable#-108702001page-size] => 10
+                    [jtable#-1765874512page-size] => 5
+                    [PHPSESSID] => 9dg2k2lhu0b1rti41uv94gmmk5
+                )
+
+        )
+
+    [headers] => Symfony\Component\HttpFoundation\HeaderBag Object
+        (
+            [headers:protected] => Array
+                (
+                    [host] => Array
+                        (
+                            [0] => localhost
+                        )
+
+                    [connection] => Array
+                        (
+                            [0] => keep-alive
+                        )
+
+                    [content-length] => Array
+                        (
+                            [0] => 74
+                        )
+
+                    [accept] => Array
+                        (
+                            [0] => application/json, text/javascript, */*; q=0.01
+                        )
+
+                    [origin] => Array
+                        (
+                            [0] => http://localhost
+                        )
+
+                    [x-requested-with] => Array
+                        (
+                            [0] => XMLHttpRequest
+                        )
+
+                    [user-agent] => Array
+                        (
+                            [0] => Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36
+                        )
+
+                    [content-type] => Array
+                        (
+                            [0] => application/x-www-form-urlencoded; charset=UTF-8
+                        )
+
+                    [referer] => Array
+                        (
+                            [0] => http://localhost/b2/web/app_dev.php/listing_ca
+                        )
+
+                    [accept-encoding] => Array
+                        (
+                            [0] => gzip, deflate
+                        )
+
+                    [accept-language] => Array
+                        (
+                            [0] => fr-FR,fr;q=0.8,en-US;q=0.6,en;q=0.4
+                        )
+
+                    [cookie] => Array
+                        (
+                            [0] => jtable%23-108702001page-size=10; jtable%23-1765874512page-size=5; PHPSESSID=9dg2k2lhu0b1rti41uv94gmmk5
+                        )
+
+                    [x-php-ob-level] => Array
+                        (
+                            [0] => 1
+                        )
+
+                )
+
+            [cacheControl:protected] => Array
+                (
+                )
+
+        )
+
+    [content:protected] => 
+    [languages:protected] => 
+    [charsets:protected] => 
+    [encodings:protected] => 
+    [acceptableContentTypes:protected] => 
+    [pathInfo:protected] => /list_ca
+    [requestUri:protected] => /b2/web/app_dev.php/list_ca
+    [baseUrl:protected] => /b2/web/app_dev.php
+    [basePath:protected] => 
+    [method:protected] => POST
+    [format:protected] => 
+    [session:protected] => Symfony\Component\HttpFoundation\Session\Session Object
+        (
+            [storage:protected] => Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage Object
+                (
+                    [bags:protected] => Array
+                        (
+                            [attributes] => Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag Object
+                                (
+                                    [name:Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag:private] => attributes
+                                    [storageKey:Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag:private] => _sf2_attributes
+                                    [attributes:protected] => Array
+                                        (
+                                            [utilisateur] => AppBundle\Entity\Utilisateur Object
+                                                (
+                                                    [idUtilisateur:protected] => 
+                                                    [nom:protected] => NDZIE Patrick Joël
+                                                    [cuid:protected] => 
+                                                    [email:protected] => joel.ndzie@orange.com
+                                                    [telephone:protected] => 
+                                                    [direction:protected] => DSI
+                                                    [service:protected] => Ingenierie OSS
+                                                    [active:protected] => 
+                                                    [activationCode:protected] => 
+                                                    [priv_admin:protected] => 
+                                                    [role:protected] => DEFAULT
+                                                    [matricule:protected] => 09022015094828
+                                                    [chaineRegions:protected] => 
+                                                    [regions:protected] => 
+                                                    [receiveEmails:protected] => 0
+                                                    [region:protected] => 
+                                                    [departement:protected] => 
+                                                    [profilUser:protected] => 
+                                                )
+
+                                        )
+
+                                )
+
+                            [flashes] => Symfony\Component\HttpFoundation\Session\Flash\FlashBag Object
+                                (
+                                    [name:Symfony\Component\HttpFoundation\Session\Flash\FlashBag:private] => flashes
+                                    [flashes:Symfony\Component\HttpFoundation\Session\Flash\FlashBag:private] => Array
+                                        (
+                                        )
+
+                                    [storageKey:Symfony\Component\HttpFoundation\Session\Flash\FlashBag:private] => _sf2_flashes
+                                )
+
+                        )
+
+                    [started:protected] => 1
+                    [closed:protected] => 
+                    [saveHandler:protected] => Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy Object
+                        (
+                            [handler:protected] => SessionHandler Object
+                                (
+                                )
+
+                            [wrapper:protected] => 1
+                            [active:protected] => 1
+                            [saveHandlerName:protected] => files
+                        )
+
+                    [metadataBag:protected] => Symfony\Component\HttpFoundation\Session\Storage\MetadataBag Object
+                        (
+                            [name:Symfony\Component\HttpFoundation\Session\Storage\MetadataBag:private] => __metadata
+                            [storageKey:Symfony\Component\HttpFoundation\Session\Storage\MetadataBag:private] => _sf2_meta
+                            [meta:protected] => Array
+                                (
+                                    [u] => 1476789008
+                                    [c] => 1476778810
+                                    [l] => 0
+                                )
+
+                            [lastUsed:Symfony\Component\HttpFoundation\Session\Storage\MetadataBag:private] => 1476789007
+                            [updateThreshold:Symfony\Component\HttpFoundation\Session\Storage\MetadataBag:private] => 0
+                        )
+
+                )
+
+            [flashName:Symfony\Component\HttpFoundation\Session\Session:private] => flashes
+            [attributeName:Symfony\Component\HttpFoundation\Session\Session:private] => attributes
+        )
+
+    [locale:protected] => 
+    [defaultLocale:protected] => en
+)

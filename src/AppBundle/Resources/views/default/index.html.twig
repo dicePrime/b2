@@ -1,0 +1,12 @@
+{{ extends(":base.html") }}
+
+{% block contenu %}
+    <div class="row">
+        <div class="col-xs-6">
+            <h2>Evolution Annuelle du CA</h2>
+        </div>
+        <div class="col-xs-6">
+            Evolution mensuelle du CA pour l'année {{ date('Y') }}
+        </div>
+    </div>
+{% endblock %}

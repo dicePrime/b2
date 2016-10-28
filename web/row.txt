@@ -1,0 +1,19 @@
+Array
+(
+    [NOM] => NDZIE Patrick Joël
+    [0] => NDZIE Patrick Joël
+    [EMAIL] => joel.ndzie@orange.com
+    [1] => joel.ndzie@orange.com
+    [PROFIL_STAF] => USR
+    [2] => USR
+    [QUALIFICATION] => EMPLOYE
+    [3] => EMPLOYE
+    [DEPARTEMENT] => INGENIERIE PFS ET SI
+    [4] => INGENIERIE PFS ET SI
+    [SERVICE] => Ingenierie OSS
+    [5] => Ingenierie OSS
+    [DIRECTION] => DSI
+    [6] => DSI
+    [MATRICULE] => 09022015094828
+    [7] => 09022015094828
+)

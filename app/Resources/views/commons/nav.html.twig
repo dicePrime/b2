@@ -1,0 +1,254 @@
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{{ path('homepage') }}">
+            <img src="{{ asset('img/logo_ocm.jpg') }}" width="35" style="display:inline;padding-top:0px;"/>
+            <h3 style="display:inline"> Beetoo</h3>
+        </a>
+    </div>
+    <!-- /.navbar-header -->
+
+    <ul class="nav navbar-top-links navbar-right">
+        
+        <!-- /.dropdown -->
+       
+        <!-- /.dropdown -->
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                {#<span style="color:white">{{ app.session.get('utilisateur').nom }}</span>#} <i class="fa fa-user fa-fw" style="color:orange"></i> <i class="fa fa-caret-down" style="color:orange"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+                <li><a href="#"><i class="fa fa-user fa-fw"></i> Mon profil</a>
+                </li>
+                <li><a href="#"><i class="fa fa-gear fa-fw"></i> Paramètres</a>
+                </li>
+                <li class="divider"></li>
+                <li><a href="{{ path("logout") }}"><i class="fa fa-sign-out fa-fw"></i> Déconnexion</a>
+                </li>
+            </ul>
+            <!-- /.dropdown-user -->
+        </li>
+        <!-- /.dropdown -->
+    </ul>
+    <!-- /.navbar-top-links -->
+
+    <div class="navbar-default sidebar orangeElement" style="color:white" role="navigation" st>
+        <div class="sidebar-nav navbar-collapse">
+            <ul class="nav" id="side-menu">
+                <li class="sidebar-search">
+                    <div class="input-group custom-search-form">
+                        <input type="text" class="form-control" placeholder="Search...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                    <!-- /input-group -->
+                </li>
+                <li>
+                    <a href="{{ path("homepage") }}"><i class="fa fa-home fa-home"></i> Accueil</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-sitemap fa-fw" style='color:black'></i>Suivi du Parc <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="#">Suivi Hebdo <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li>
+                                    <a href="#">Synthèse Hebdo</a>
+                                </li>
+                                <li id="detailsHebdo">
+                                    <a href="{{ path('details_hebdo') }}">Détails Hebdo</a>
+                                </li>
+                                <li>
+                                    <a href="#">Evolution Hebdo</a>
+                                </li>
+                                <li>
+                                    <a href="#">Parc et activations</a>
+                                </li>
+                                <li>
+                                    <a href="#">Parc par type</a>
+                                </li>                      
+                                <li>
+                                    <a href="#">Détails parc par type</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                               <a href="#">Suivi Mensuel <span class="fa arrow"></span></a>
+                    <ul class="nav nav-third-level">
+                        <li>
+                            <a href="#">Synthèses mensuelles</a>
+                        </li>
+                        <li>
+                            <a href="#">Détails des lignes du parc</a>
+                        </li>
+                        <li>
+                            <a href="#">Analyse du parc</a>
+                        </li>
+                        <li>
+                            <a href="#">Evolution mensuelle des activations</a>
+                        </li>
+                        <li>
+                            <a href="#">Croissance mensuelle du parc</a>
+                        </li>
+                        <li>
+                            <a href="#">Parc par formule</a>
+                        </li>
+                        <li>
+                            <a href="#">Répartition par formule</a>
+                        </li>
+                        <li>
+                            <a href="#">Détails du parc par formule</a>
+                        </li>
+                    </ul>
+                            
+                            <!-- /.nav-third-level -->
+                        </li>
+
+                    </ul>
+                    <!-- /.nav-second-level -->
+
+
+                
+                 
+                    <!-- /.nav-third-level -->
+                
+                </li>                
+
+                <!-- /.nav-second-level -->
+
+                <li>
+                    <a href="#"><i class="fa fa-money fa-fw" style='color:black'></i> Suivi du CA<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                    
+                        <li>
+                            <a href="morris.html">Synthese CA</a>
+                        </li>
+                        <li id="listingCA">
+                            <a href="{{ path("listing_ca") }}">Listing CA</a>
+                        </li>
+                        <li>
+                            <a href="flot.html" title="Classement du CA par mois par entreprise">Ranking CA</a>
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-exclamation-triangle fa-fw" style='color:black'></i>Requêtes <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="{{ path('listing_requetes') }}"><span class='badge'>0</span>&nbsp;Requêtes à mon niveau </a>
+                        </li>                        
+                        <li>
+                            <a href="{{ path('listing_requetes') }}"><span class='badge'>0</span>&nbsp;Toutes les requêtes</a>
+                        </li>
+                        
+                        <li>
+                            <a href="#">Saisie des requêtes</a>
+                        </li>
+                        <li>
+                            <a href="#">Graphe des requêtes</a>
+                        </li>
+                        <li>
+                            <a href="#">Statistiques requêtes</a>
+                        </li>
+                        <li>
+                            <a href="#">Synthèse par requêtes</a>
+                        </li>
+                        
+                    </ul>
+                    <!-- /.nav-second-level -->
+
+
+                
+                 
+                    <!-- /.nav-third-level -->
+                
+                </li>      
+                
+                <li>
+                    <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
+                </li>
+                <li>
+                    <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="panels-wells.html">Panels and Wells</a>
+                        </li>
+                        <li>
+                            <a href="buttons.html">Buttons</a>
+                        </li>
+                        <li>
+                            <a href="notifications.html">Notifications</a>
+                        </li>
+                        <li>
+                            <a href="typography.html">Typography</a>
+                        </li>
+                        <li>
+                            <a href="icons.html"> Icons</a>
+                        </li>
+                        <li>
+                            <a href="grid.html">Grid</a>
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="#">Second Level Item</a>
+                        </li>
+                        <li>
+                            <a href="#">Second Level Item</a>
+                        </li>
+                        <li>
+                            <a href="#">Third Level <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li>
+                                    <a href="#">Third Level Item</a>
+                                </li>
+                                <li>
+                                    <a href="#">Third Level Item</a>
+                                </li>
+                                <li>
+                                    <a href="#">Third Level Item</a>
+                                </li>
+                                <li>
+                                    <a href="#">Third Level Item</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-third-level -->
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="blank.html">Blank Page</a>
+                        </li>
+                        <li>
+                            <a href="login.html">Login Page</a>
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+            </ul>
+        </div>
+        <!-- /.sidebar-collapse -->
+    </div>
+    <!-- /.navbar-static-side -->
+</nav>
