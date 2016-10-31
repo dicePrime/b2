@@ -44,6 +44,12 @@ listing_requetes:
     defaults: { _controller:AppBundle:ListingRequetes:listingRequetes }
     options:
         expose: true
+
+saisie_requetes:
+    path: /requetes/nouvelle
+    defaults: { _controller:AppBundle:SaisieRequetes:saisieRequete }
+    options:
+        expose: true
         
         
         
@@ -53,3 +59,11 @@ get_b2b_requetes:
     path: /b2b_requetes/{minDate}/{numeroTicket}/{compteClient}/{nomClient}/{operation}
     #default: { _co
   
+  
+## Upload des fichier
+
+upload_files:
+    path: /upload_files
+    defaults: { _controller:AppBundle:Uploader:upload }
+    options:
+        expose: true

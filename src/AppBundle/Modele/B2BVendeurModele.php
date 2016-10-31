@@ -19,12 +19,12 @@ use AppBundle\Entity\B2BVendeur;
 class B2BVendeurModele {
     //put your code here
     
-    public static  $_SELECT_ALL_B2B_VENDEUR = "select * from b2b_vendeur";
+    public static  $_SELECT_ALL_B2B_VENDEUR = "select * from b2b_vendeur order by NomVendeur asc";
     
     
     private $connection;
     
-    public function __contruct($connection)
+    public function __construct($connection)
     {
         $this->connection = $connection;
     }
@@ -33,21 +33,21 @@ class B2BVendeurModele {
     {
       $b2bVendeur = new B2BVendeur();
       
-      $b2bVendeur->setActif($row['actif']);
-      $b2bVendeur->setStatut($row['statut']);
-      $b2bVendeur->setVendeur($row['vendeur']);
-      $b2bVendeur->setPhoto($row['photo']);
-      $b2bVendeur->setRegion($row['region']);
-      $b2bVendeur->setVille($row['ville']);
-      $b2bVendeur->setNEquipe($row[nequipe]);
-      $b2bVendeur->setMetier($row['metier']);
-      $b2bVendeur->setEmail($row['email']);
-      $b2bVendeur->setTelephone($row['telephone']);
-      $b2bVendeur->setMatricule($row['matricule']);
-      $b2bVendeur->setAutreNom($row['autrenomm']);
-      $b2bVendeur->setNomVendeur($row['nomvendeur']);
-      $b2bVendeur->setNAscom($row['nascom']);
-      $b2bVendeur->setNVendeur($row['nvendeur']);
+      $b2bVendeur->setActif($row['Actif']);
+      $b2bVendeur->setStatut($row['Statut']);
+      $b2bVendeur->setVendeur($row['Vendeur']);
+      $b2bVendeur->setPhoto($row['Photo']);
+      $b2bVendeur->setRegion($row['Region']);
+      $b2bVendeur->setVille($row['Ville']);
+      $b2bVendeur->setNEquipe($row['NEquipe']);
+      $b2bVendeur->setMetier($row['Metier']);
+      $b2bVendeur->setEmail($row['Email']);
+      $b2bVendeur->setTelephone($row['Telephone']);
+      $b2bVendeur->setMatricule($row['Matricule']);
+      $b2bVendeur->setAutreNom($row['AutreNom']);
+      $b2bVendeur->setNomVendeur($row['NomVendeur']);
+      $b2bVendeur->setNAscom($row['NAscom']);
+      $b2bVendeur->setNVendeur($row['NVendeur']);
       
       return $b2bVendeur;
     }

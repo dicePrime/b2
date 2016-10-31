@@ -49,7 +49,7 @@ class B2BOperationLigneModel {
         {
             $resultat[] = $this->fetchOperation($row);
         }
-        print_r($resultat);
+        //print_r($resultat);
         return $resultat;
         }
         catch(\Exception $ex)

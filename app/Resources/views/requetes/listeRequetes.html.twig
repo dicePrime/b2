@@ -34,8 +34,7 @@
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-2 control-label">Numéro Ticket</label>
                     <div class="col-xs-12 col-sm-4">                        
-                        <input type="text" class="form-control" id="numeroTicket" name="numeroTicket"
-                               value = {{ app.request.get('numeroTicket')  }} />
+                        <input type="text" class="form-control" id="numeroTicket" name="numeroTicket" value = {{ app.request.get('numeroTicket')  }} />
                     </div>
 
                     <label class="col-xs-12 col-sm-2 control-label">Compte Client</label>
@@ -117,6 +116,7 @@
         <script src="{{ asset('js/dataTables.tableTools.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/dataTables.buttons.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/buttons.flash.min.js') }}" type="text/javascript"></script> 
+        
         <script>
             $(document).ready(function () {
 

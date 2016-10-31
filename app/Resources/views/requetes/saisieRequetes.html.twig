@@ -1,0 +1,259 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %} 
+    {{ parent() }}
+    <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/dropzone.css') }}" />
+{% endblock %}
+
+{% block contenu %}
+    <div style='padding-top:50px;'>
+        <h4 style="color:orange;text-decoration: underline"> > Nouvelle Requête</h4>
+        <form class="form form-horizontal well">
+            <fieldset>
+                <legend>Informations réclammation</legend>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-2 control-label">Date de réception</label>
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="input-group date" id="debut">
+                            <input type="text" class="form-control" id="dateReception" name="dateReception" required/>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                    </div>
+                    <label class="col-xs-12 col-sm-1 control-label">Source</label>
+                    <div class="col-xs-12 col-sm-5">
+                        <label class="radio-inline"><input type="radio" name="source" value="Email" selected="selected">Email</label>
+                        <label class="radio-inline"><input type="radio" name="source" value="Courrier">Courrier</label>
+                        <label class="radio-inline"><input type="radio" name="source" value="Personne physique">Personne</label>
+                        <label class="radio-inline"><input type="radio" name="source" value="Autre">Autre</label> 
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-2 control-label">Opération</label>
+                    <div class="col-xs-12 col-sm-4">                        
+                        <select class="form-control" id="operation" class="operation" name="operation">
+                            <option value=""></option>
+                            {% for operation in app.session.get('listeOperations') %}
+                                <option value="{{ operation.libelle }}">{{ operation.libelle }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Données client</legend>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-2 control-label">Compte</label>
+                    <div class="col-xs-12 col-sm-4">                        
+                        <input type="text" class="form-control" id="numeroTicket" name="compteClient"/>
+                    </div>
+
+                    <label class="col-xs-12 col-sm-2 control-label">Nom du client ou du contact</label>
+                    <div class="col-xs-12 col-sm-4">
+                        <input type="text" class="form-control" id="compteClient" name="nomClient"/>
+                    </div>
+                </div> 
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-2 control-label">Commercial</label>
+                    <div class="col-xs-12 col-sm-4">
+                        <select class="form-control" id="commercial" name="commercial">
+                            {% for vendeur in app.session.get('vendeurs') %}
+                                <option value="{{ vendeur.nVendeur }}">{{ vendeur.nomVendeur }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <label class="col-xs-12 col-sm-2 control-label">Ligne</label>
+                    <div class="col-xs-12 col-sm-4">
+                        <input type="text" class="form-control" id="compteClient" name="nomClient"/>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Destinataire(s)</legend>
+                <div class="form-group">
+                    <div class="col-xs-12 col-sm-12">
+                        <table class="table table-bordered table-condensed table-striped" id="emailsTable">
+                            <thead class="orangeElement">
+                                <tr>
+                                    <th>Nom</th><th>email</th><th>En copie ou principal</th><th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="source">
+                                    <td><input type="text" class="form-control"/></td>
+                                    <td><input type="email" class="form-control"/></td>
+                                    <td><select class="form-control" id="natureDestinataire">
+                                            <option value="To" selected>Principal</option>
+                                            <option value="Cc">En copie</option>
+                                    </td>
+                                    <td><a class="btnDelete" title="Supprimer cette ligne"><center><span class="glyphicon glyphicon-trash"></span></center></a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <a href="#btnAdd" title="Ajouter une ligne" id="btnAdd" style="padding-left:800px;width:15px;font-size: 2em;color:orangered"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Remarques et pièces jointes</legend>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-2 control-label">Remarques</label>
+                    <div class="col-xs-12 col-sm-4">
+                        <textarea class="form-control" name="remarques" id="remarques"></textarea>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div id="toDrop" style="border:solid;margin:5px;border-width:1px;height: 300px;border-style: dashed; background-color:white">
+                            
+                        </div>
+                    </div>
+            </fieldset>
+
+            <div class="form-group">
+                <div class="col-xs-12 col-sm-4 col-sm-offset-4">                        
+                    <input type="submit" class="btn btn-block orangeElement" style="color:white" value="Enregistrer"/>
+                </div>
+                <div  style="display:inline" class="col-xs-12 col-sm-4">
+                    <img src="{{ asset('img/ajax_loader.gif') }}" height="30" width="30" hidden  id="loadingResponse"/>
+                    <span id="reponse"></span>
+                </div>
+                
+            </div>
+
+
+
+        </form>
+    </div>
+{% endblock %}
+{% block scripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/moment.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-datetimepicker.js') }}"></script>
+    <script src="{{ asset('js/dropzone.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+
+            $("#btnAdd").bind('click', Add);
+            $(".btnDelete").bind('click', Delete);
+            $("#toDrop").dropzone(
+            { 
+                url: Routing.generate("upload_files"),
+                clickable: true,
+                dictDefaultMessage: "Cliquez pour ajouter un fichier",
+                uploadMultiple: true
+            });
+            $('#debut').datetimepicker({
+                format: 'YYYY-MM-DD HH:mm:ss',
+                locale: 'fr'
+            }
+            );
+
+            var newRowHtml = initNewRowHtml();
+
+            function initNewRowHtml()
+            {
+                var chaine = $("#source").html();
+                return "<tr>" + chaine + "</tr>";
+            }
+
+            function Add()
+            {
+                $('#emailsTable tbody').append(newRowHtml);
+                $('.btnDelete').bind('click', Delete);
+            }
+
+            function Delete()
+            {
+                //on recupère le parent de l'élément
+                var par = $(this).parent().parent();
+
+                // on supprime ce parent (la ligne)
+                par.remove();
+            }
+
+            function Submit()
+            {
+
+                var dateReception = $("#dateReception").val();
+                var source = $("#source").val();
+                var operation = $("#operation").val();
+                var compteClient = $("#compteClient").val();
+                var nomClient = $("#nomClient").val();
+                var commercial = $("#commercial").val();
+                var ligne = $("#ligne").val();
+                var destinataires = getTableValues();
+                var remarques = $("#remarques").val();
+
+                var data = {
+                    'dateReception': dateReception,
+                    'source': source,
+                    'operation': operation,
+                    'compteClient': compteClient,
+                    'nomClient': nomClient,
+                    'commercial': commercial,
+                    'ligne': ligne,
+                    'destinataires': destinataires,
+                    'remarques': remarques};
+
+                var route = Routing.generate('saisie_requetes');
+                var redirect_route = Routing.generate('listing_requetes');
+                $("#loadingResponse").toggle();
+                $('#reponse').html("<span style='color:orange'>Enregistrement en cours...</span>");
+
+                $.ajax({
+                    url: route,
+                    type: 'POST',
+                    data: data,
+                    dataType: 'json',
+                    success: function (json)
+                    {
+
+                        if (json['resultat'] === 'OK')
+                        {
+                            $("#reponse").html("<span class='ok'>" + json['message'] + "</span>");
+                            $("#loadingResponse").toggle();
+                        } else
+                        {
+                            $("#reponse").html("<span class='nok'>" + json['message'] + "</span>");
+                            $("#loadingResponse").toggle();
+                        }
+                        window.location = redirect_route;
+                    },
+                    error: function (json)
+                    {
+                        $("#reponse").html("<span class='nok'> Impossible d'enregistrer la demande</span>");
+                        $("#loadingResponse").toggle();
+                    }
+                });
+
+            }
+
+            /**
+             * Cette fonction retourne la liste des réparations leurs id
+             * @returns {undefined}
+             */
+            function getTableValues()
+            {
+                var tableData = new Array();
+                $('#emailsTable tr').each(function (row, tr) {
+                    tableData[row] =
+                            {'nom': $(tr).find('td:eq(0)').find('input').val(),
+                                'email': $(tr).find('td:eq(1)').find('input').val(),
+                                'nature': $(tr).find('td:eq(2)').find('select').val()
+                            };
+
+                });
+                tableData.shift();
+                return tableData;
+
+            }
+            
+            
+
+        });
+
+
+    </script>
+{% endblock %}
