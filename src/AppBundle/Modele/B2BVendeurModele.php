@@ -71,7 +71,7 @@ class B2BVendeurModele {
       }
       catch(\Exception $ex)
       {
-        Tools::writeFile("exceptions/findAll.txt", $ex->getMessage());
+        Tools::writeFile("exceptions/findAllVendeurs.txt", $ex->getMessage());
         return array();  
       }  
     }

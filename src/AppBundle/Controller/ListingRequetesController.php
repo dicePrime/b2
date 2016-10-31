@@ -48,13 +48,13 @@ class ListingRequetesController extends Controller {
         $etatParam = $request->get('etat');
         $nomClientParam = $request->get('nomClient');
         
-        print_r($operationParam);
+        //print_r($operationParam);
         
         if(NULL == $request->getSession()->get('listeOperations'))
         {
             $b2bOperationLigneModel = new B2BOperationLigneModel($connection);       
             $operations = $b2bOperationLigneModel->getAllOperationsLigne();
-            $session()->set('listeOperations', $operations);
+            $session->set('listeOperations', $operations);
         }
         
         if(NULL == $request->getSession()->get('etats'))
@@ -62,7 +62,7 @@ class ListingRequetesController extends Controller {
             $session->set('etats', array('Ouvert', 'Fermé'));
         }
         
-        print_r($etatParam);
+        //print_r($etatParam);
         
         if (null == $debut && null == $fin && null == $ticket && null == $compteParam &&
                 null == $operationParam && null == $etatParam && null == $nomClientParam) {

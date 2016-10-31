@@ -23,15 +23,18 @@
             <file>file:/C:/wamp/www/b2/src/AppBundle/Tests/Controller/DefaultControllerTest.php</file>
             <file>file:/C:/wamp/www/b2/src/AppBundle/Modele/OCMUserFinder.php</file>
             <file>file:/C:/wamp/www/b2/app/config/config.yml</file>
+            <file>file:/C:/wamp/www/b2/src/AppBundle/Entity/B2BOperationLigne.php</file>
             <file>file:/C:/wamp/www/b2/src/AppBundle/Entity/Utilisateur.php</file>
             <file>file:/C:/wamp/www/b2/src/AppBundle/Entity/ListingCA.php</file>
             <file>file:/C:/wamp/www/b2/app/AppCache.php</file>
             <file>file:/C:/wamp/www/b2/web/jtable/themes/lightcolor/blue/jtable.less</file>
+            <file>file:/C:/wamp/www/b2/src/AppBundle/Modele/B2BOperationLigneModel.php</file>
             <file>file:/C:/wamp/www/b2/app/Resources/views/base.html.twig</file>
             <file>file:/C:/wamp/www/b2/src/AppBundle/Entity/B2BRequete.php</file>
             <file>file:/C:/wamp/www/b2/src/AppBundle/Entity/DetailsHebdo.php</file>
             <file>file:/C:/wamp/www/b2/src/AppBundle/Entity/EvolutionHebdo.php</file>
             <file>file:/C:/wamp/www/b2/src/AppBundle/AppBundle.php</file>
+            <file>file:/C:/wamp/www/b2/app/Resources/views/requetes/nouvelleRequete.html.twig</file>
             <file>file:/C:/wamp/www/b2/src/AppBundle/Modele/UtilisateurDAO.php</file>
             <file>file:/C:/wamp/www/b2/app/config/routing.yml</file>
             <file>file:/C:/wamp/www/b2/app/config/parameters.yml</file>
@@ -41,7 +44,9 @@
             <file>file:/C:/wamp/www/b2/src/AppBundle/Commons/Tools.php</file>
             <file>file:/C:/wamp/www/b2/src/AppBundle/Controller/DetailsHebdoController.php</file>
             <file>file:/C:/wamp/www/b2/app/Resources/views/requetes/listeRequetes.html.twig</file>
+            <file>file:/C:/wamp/www/b2/src/AppBundle/Controller/ListingRequetesController.php</file>
             <file>file:/C:/wamp/www/b2/app/Resources/views/suivica/listingCA.html.twig</file>
+            <file>file:/C:/wamp/www/b2/src/AppBundle/Controller/SaisieRequetesController.php</file>
             <file>file:/C:/wamp/www/b2/src/AppBundle/Entity/B2BActivation.php</file>
             <file>file:/C:/wamp/www/b2/app/AppKernel.php</file>
             <file>file:/C:/wamp/www/b2/app/Resources/views/default/login.html.twig</file>
