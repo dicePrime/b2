@@ -5,6 +5,7 @@
     <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet"/>
     <link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/dropzone.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/uploadfile.css') }}"/>
 {% endblock %}
 
 {% block contenu %}
@@ -23,7 +24,7 @@
                     </div>
                     <label class="col-xs-12 col-sm-1 control-label">Source</label>
                     <div class="col-xs-12 col-sm-5">
-                        <label class="radio-inline"><input type="radio" name="source" value="Email" selected="selected">Email</label>
+                        <label class="radio-inline"><input type="radio" name="source" value="Email" checked="checked">Email</label>
                         <label class="radio-inline"><input type="radio" name="source" value="Courrier">Courrier</label>
                         <label class="radio-inline"><input type="radio" name="source" value="Personne physique">Personne</label>
                         <label class="radio-inline"><input type="radio" name="source" value="Autre">Autre</label> 
@@ -105,8 +106,8 @@
                         <textarea class="form-control" name="remarques" id="remarques"></textarea>
                     </div>
                     <div class="col-xs-12 col-sm-6">
-                        <div id="toDrop" style="border:solid;margin:5px;border-width:1px;height: 300px;border-style: dashed; background-color:white">
-                            
+                        <div id="fileuploader" height=300px; style="overflow: auto">
+
                         </div>
                     </div>
             </fieldset>
@@ -119,7 +120,7 @@
                     <img src="{{ asset('img/ajax_loader.gif') }}" height="30" width="30" hidden  id="loadingResponse"/>
                     <span id="reponse"></span>
                 </div>
-                
+
             </div>
 
 
@@ -131,27 +132,47 @@
     {{ parent() }}
     <script src="{{ asset('js/moment.js') }}"></script>
     <script src="{{ asset('js/bootstrap-datetimepicker.js') }}"></script>
-    <script src="{{ asset('js/dropzone.js') }}"></script>
+    <script src="{{ asset('js/jquery.uploadfile.min.js') }}"></script>
     <script>
         $(document).ready(function () {
 
             $("#btnAdd").bind('click', Add);
             $(".btnDelete").bind('click', Delete);
-            $("#toDrop").dropzone(
-            { 
-                url: Routing.generate("upload_files"),
-                clickable: true,
-                dictDefaultMessage: "Cliquez pour ajouter un fichier",
-                uploadMultiple: true
+            $("#fileuploader").uploadFile({
+                url: Routing.generate('upload_files'),
+                dragDropStr: "<span><b>cliquez pour en sélectionner les fichiers</b></span>",
+                multiple: true,
+                showDelete: true,
+                dragDrop: true,
+                returnType: "json",
+                deleteCallback: function (data, pd)
+                {
+
+                    var fileName = pd.filename[0].childNodes[0].data.split(" ")[1].trim();
+                    $.ajax({
+                        url: Routing.generate('delete_file'),
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {'filename': fileName},
+                        success: function (data)
+                        {
+                            console.log('file deleted');
+                        },
+                        error: function ()
+                        {
+                            console.log('error while deleting files');
+                        }
+                    });
+
+
+                }
             });
             $('#debut').datetimepicker({
                 format: 'YYYY-MM-DD HH:mm:ss',
                 locale: 'fr'
             }
             );
-
             var newRowHtml = initNewRowHtml();
-
             function initNewRowHtml()
             {
                 var chaine = $("#source").html();
@@ -168,7 +189,6 @@
             {
                 //on recupère le parent de l'élément
                 var par = $(this).parent().parent();
-
                 // on supprime ce parent (la ligne)
                 par.remove();
             }
@@ -185,7 +205,6 @@
                 var ligne = $("#ligne").val();
                 var destinataires = getTableValues();
                 var remarques = $("#remarques").val();
-
                 var data = {
                     'dateReception': dateReception,
                     'source': source,
@@ -196,12 +215,10 @@
                     'ligne': ligne,
                     'destinataires': destinataires,
                     'remarques': remarques};
-
                 var route = Routing.generate('saisie_requetes');
                 var redirect_route = Routing.generate('listing_requetes');
                 $("#loadingResponse").toggle();
                 $('#reponse').html("<span style='color:orange'>Enregistrement en cours...</span>");
-
                 $.ajax({
                     url: route,
                     type: 'POST',
@@ -227,7 +244,6 @@
                         $("#loadingResponse").toggle();
                     }
                 });
-
             }
 
             /**
@@ -243,15 +259,10 @@
                                 'email': $(tr).find('td:eq(1)').find('input').val(),
                                 'nature': $(tr).find('td:eq(2)').find('select').val()
                             };
-
                 });
                 tableData.shift();
                 return tableData;
-
             }
-            
-            
-
         });
 
 

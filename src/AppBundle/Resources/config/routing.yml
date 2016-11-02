@@ -67,3 +67,9 @@ upload_files:
     defaults: { _controller:AppBundle:Uploader:upload }
     options:
         expose: true
+       
+delete_file:
+    path: /delete_file
+    defaults: { _controller:AppBundle:Uploader:deleteFile }
+    options:
+        expose: true

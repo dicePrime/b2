@@ -1,0 +1,38 @@
+Array
+(
+    [0] => uploads\tmp\02dmrdra8bii1062emoohodj43\logo_rtc.PNG
+    [1] => uploads\tmp\02dmrdra8bii1062emoohodj43\kimbo.png
+    [2] => uploads\tmp\02dmrdra8bii1062emoohodj43\logo_rtc.PNG
+    [3] => uploads\tmp\02dmrdra8bii1062emoohodj43\icon_impact.PNG
+    [4] => uploads\tmp\02dmrdra8bii1062emoohodj43\collation.png
+    [5] => uploads\tmp\02dmrdra8bii1062emoohodj43\collation.png
+    [6] => uploads\tmp\02dmrdra8bii1062emoohodj43\collation.png
+    [7] => uploads\tmp\02dmrdra8bii1062emoohodj43\kimbo.png
+    [8] => uploads\tmp\02dmrdra8bii1062emoohodj43\collation.png
+    [9] => uploads\tmp\02dmrdra8bii1062emoohodj43\14469669_1067840273323475_3317948818020529513_n.png
+    [10] => uploads\tmp\02dmrdra8bii1062emoohodj43\collation.png
+    [11] => uploads\tmp\02dmrdra8bii1062emoohodj43\collation.png
+    [12] => uploads\tmp\02dmrdra8bii1062emoohodj43\collation.png
+    [13] => uploads\tmp\02dmrdra8bii1062emoohodj43\icon_impact.PNG
+    [14] => uploads\tmp\02dmrdra8bii1062emoohodj43\collation.png
+    [15] => uploads\tmp\02dmrdra8bii1062emoohodj43\kimbo.png
+    [16] => uploads\tmp\02dmrdra8bii1062emoohodj43\collation.png
+    [17] => uploads\tmp\02dmrdra8bii1062emoohodj43\kimbo.png
+    [18] => uploads\tmp\02dmrdra8bii1062emoohodj43\collation.png
+    [19] => uploads\tmp\02dmrdra8bii1062emoohodj43\kimbo.png
+    [20] => uploads\tmp\02dmrdra8bii1062emoohodj43\collation.png
+    [21] => uploads\tmp\02dmrdra8bii1062emoohodj43\kimbo.png
+    [22] => uploads\tmp\02dmrdra8bii1062emoohodj43\collation.png
+    [23] => uploads\tmp\02dmrdra8bii1062emoohodj43\kimbo.png
+    [24] => uploads\tmp\02dmrdra8bii1062emoohodj43\collation.png
+    [25] => uploads\tmp\02dmrdra8bii1062emoohodj43\icon_impact.PNG
+    [26] => uploads\tmp\02dmrdra8bii1062emoohodj43\collation.png
+    [27] => uploads\tmp\02dmrdra8bii1062emoohodj43\kimbo.png
+    [28] => uploads\tmp\02dmrdra8bii1062emoohodj43\collation.png
+    [29] => uploads\tmp\02dmrdra8bii1062emoohodj43\kimbo.png
+    [30] => uploads\tmp\02dmrdra8bii1062emoohodj43\icon_impact.PNG
+    [31] => uploads\tmp\02dmrdra8bii1062emoohodj43\Desert.jpg
+    [32] => uploads\tmp\02dmrdra8bii1062emoohodj43\Chrysanthemum.jpg
+    [33] => uploads\tmp\02dmrdra8bii1062emoohodj43\Jellyfish.jpg
+    [34] => 
+)
