@@ -17,6 +17,7 @@ use AppBundle\Modele\UtilisateurDAO;
 use AppBundle\Entity\Utilisateur;
 use AppBundle\Modele\B2BRequeteModel;
 use AppBundle\Modele\B2BOperationLigneModel;
+use diceprime\Bundle\ORMBundle\AClasses\DataManager;
 
 /**
  * Description of ListingRequetesController
@@ -64,14 +65,14 @@ class ListingRequetesController extends Controller {
         
         //print_r($etatParam);
         
-        if (null == $debut && null == $fin && null == $ticket && null == $compteParam &&
+       if (null == $debut && null == $fin && null == $ticket && null == $compteParam &&
                 null == $operationParam && null == $etatParam && null == $nomClientParam) {
             $requetes = array();
         } else {
             $requetes = $b2bRequeteModel->getB2BRequetes($debut, $fin, $ticket, $compteParam, $operationParam, $etatParam, $nomClientParam);
         }
 
-
+       
         return $this->render('requetes/listeRequetes.html.twig', array(
                     'base_dir' => realpath($this->container->getParameter('kernel.root_dir') . '/..'),
                     'requetes' => $requetes));

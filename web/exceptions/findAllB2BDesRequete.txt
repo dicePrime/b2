@@ -1,0 +1,3 @@
+An exception occurred while executing 'select * from b2b_des_requete order by nom asc':
+
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'beetoo_prod.b2b_des_requete' doesn't exist

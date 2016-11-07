@@ -10,6 +10,7 @@ namespace AppBundle\Modele;
 
 use AppBundle\Commons\Tools;
 use AppBundle\Entity\B2BRequete;
+use diceprime\Bundle\ORMBundle\AClasses\DataManager;
 
 /**
  * Description of RequeteModel
@@ -26,40 +27,34 @@ class B2BRequeteModel {
     public static $_GET_REQUETES_BY_DATES = "select * from b2b_requete, rec_personnel WHERE nuserInit = npersonnel AND (date_reception IS NOT NULL) AND (date_reception >= :minDate AND date_reception <= :maxDate)";
     //public static $_GET_BY_DATES = ""
 
+    //public static $_INSERT_INTO_B2B_REQUETE=
+    
+    
     private $connection;
+    private $dataManager;
 
     public function __construct($connection) {
 
         $this->connection = $connection;
+        $this->dataManager = new DataManager("B2BRequete", $connection);
+    }
+    
+    /**
+     * Cette requête prend en paramètre une requete et la met à jour 
+     * @param B2BRequete $b2bRequete
+     */
+    public function updateB2BRequete(B2BRequete $b2bRequete)
+    {
+        
+    }
+    
+    
+    public function insertRequete(B2BRequete $requete)
+    {
+           
     }
 
-    public function fetchB2BRequete($row) {
-        try {
-            $b2bRequete = new B2BRequete();
-            $b2bRequete->setDateCloture($row['Date_Cloture']);
-            $b2bRequete->setDateReception($row['Date_reception']);
-            $b2bRequete->setDateTransmission($row['Date_transmission']);
-            $b2bRequete->setDestinataireDSC($row['Destinataire_dsc']);
-            //$b2bRequete->setResponsableDSC($row['Responsable_dsc']);
-            $b2bRequete->setLigneConcernee($row['Ligne']);
-            $b2bRequete->setNAscom($row['NAscom']);
-            $b2bRequete->setNumeroTicket($row['NumeroTicket']);
-            //$b2bRequete->setDateCreation($row['date_creation']);
-            //$b2bRequete->setOperation($row['operation']);
-            $b2bRequete->setNomClient($row['Nom_Client']);
-            $b2bRequete->setCompteClient($row['Compte_Client']);
-            $b2bRequete->setStatut($row['Statut']);
-            $b2bRequete->setOperation($row['Operation']);
-            $b2bRequete->setInitiateur($row['NomPrenom']);
-
-
-            return $b2bRequete;
-        } catch (\Exception $ex) {
-            Tools::writeFile('exceptions/fetchB2BRequete.txt', $ex->getMessage());
-            return null;
-        }
-    }
-
+    
     public function getRequetesByTicket($requetes, $ticket) {
         $resultat = array();
 
@@ -125,21 +120,10 @@ class B2BRequeteModel {
     public function getB2BRequetes($debut, $fin, $ticket, $compteParam, $operationParam, $etatParam, $nomClientParam) {
         $dateDebut = NULL != $debut ? $debut : B2BRequeteModel::$_MIN_DATE;
         $dateFin = NULL != $fin ? $fin : B2BRequeteModel::$_MAX_DATE;
-       
-        $resultat = array();
-
         try {
-            $req = $this->connection->prepare(B2BRequeteModel::$_GET_REQUETES_BY_DATES);
-            $req->bindValue('minDate', $dateDebut);
-            $req->bindValue('maxDate', $dateFin);
-               
-
-            $req->execute();
-            
-            while ($row = $req->fetch()) {
-                $resultat[] = $this->fetchB2BRequete($row); 
-            }
-
+            $resultat = $this->dataManager->findBy(array(array('champ'=>'Date_reception','condition'=> array('condition' => '>=', 'valeur' =>$dateDebut)),
+                                         array('champ'=>'Date_reception','condition' => array('condition' => '<=', 'valeur'=> $dateFin))));
+                       
             if ($ticket != null and (  strlen($ticket) > 1 )) {
                 $resultat = $this->getRequetesByTicket($resultat, $ticket);
             }

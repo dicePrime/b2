@@ -8,7 +8,6 @@
 
 namespace AppBundle\Controller;
 
-
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,6 +17,7 @@ use AppBundle\Modele\UtilisateurDAO;
 use AppBundle\Entity\Utilisateur;
 use AppBundle\Modele\B2BVendeurModele;
 use AppBundle\Modele\B2BOperationLigneModel;
+use AppBundle\Modele\B2BDesRequeteModel;
 
 /**
  * Description of SaisieRequetesController
@@ -27,18 +27,25 @@ use AppBundle\Modele\B2BOperationLigneModel;
 class SaisieRequetesController extends Controller {
 
     //put your code here
+    
+    
 
     public function saisieRequeteAction(Request $request) {
-        
+
         $connection = $this->get("database_connection");
 
         $b2bVendeurModel = new B2BVendeurModele($connection);
+
+        $b2bDesRequeteModel = new B2BDesRequeteModel($connection);
 
         $session = $request->getSession();
 
 
         //On enregistre les informations du formulaire
         if ($request->isXmlHttpRequest()) {
+            
+            
+            
             return $this->render('requetes/saisieRequetes.html.twig', array(
                         'base_dir' => realpath($this->container->getParameter('kernel.root_dir') . '/..')));
         } else { //on affiche le formulaire
@@ -47,6 +54,13 @@ class SaisieRequetesController extends Controller {
                 $session->set('vendeurs', $vendeurs);
             } else {
                 $vendeurs = $session->get('vendeurs');
+            }
+
+            if (NULL == $session->get('destinataires')) {
+                $destinataires = $b2bDesRequeteModel->findAll();
+                $session->set('destinataires', $destinataires);
+            } else {
+                $destinataires = $session->get('destinataires');
             }
 
             if (NULL == $request->getSession()->get('listeOperations')) {

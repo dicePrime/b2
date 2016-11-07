@@ -10,10 +10,10 @@
 
 {% block contenu %}
     <div style='padding-top:50px;'>
-        <h4 style="color:orange;text-decoration: underline"> > Nouvelle Requête</h4>
-        <form class="form form-horizontal well">
-            <fieldset>
-                <legend>Informations réclammation</legend>
+        <h4 class="text-success"> > Nouvelle Requête</h4>
+        <form class="form form-horizontal">
+            <fieldset >
+                <legend class="text-primary">Informations réclammation</legend>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-2 control-label">Date de réception</label>
                     <div class="col-xs-12 col-sm-4">
@@ -42,8 +42,8 @@
                     </div>
                 </div>
             </fieldset>
-            <fieldset>
-                <legend>Données client</legend>
+            <fieldset >
+                <legend class="text-primary">Données client</legend>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-2 control-label">Compte</label>
                     <div class="col-xs-12 col-sm-4">                        
@@ -71,20 +71,28 @@
                     </div>
                 </div>
             </fieldset>
-            <fieldset>
-                <legend>Destinataire(s)</legend>
+            <fieldset >
+                <legend class="text-primary">Destinataire(s)</legend>
                 <div class="form-group">
                     <div class="col-xs-12 col-sm-12">
-                        <table class="table table-bordered table-condensed table-striped" id="emailsTable">
+                        <table class="table table-bordered table-condensed table-striped table-responsive" id="emailsTable">
                             <thead class="orangeElement">
                                 <tr>
-                                    <th>Nom</th><th>email</th><th>En copie ou principal</th><th>Action</th>
+                                    <th>Destinataire</th><th>En copie ou principal</th><th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr id="source">
-                                    <td><input type="text" class="form-control"/></td>
-                                    <td><input type="email" class="form-control"/></td>
+                                    <td>
+                                        <select class="form-control">
+                                            <option value="">
+                                                
+                                            </option>
+                                            {% for destinataire in app.session.get('destinataires') %}
+                                                <option value ="{{ destinataire.id }}">{{ destinataire.nom }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </td>
                                     <td><select class="form-control" id="natureDestinataire">
                                             <option value="To" selected>Principal</option>
                                             <option value="Cc">En copie</option>
@@ -99,14 +107,14 @@
                 </div>
             </fieldset>
             <fieldset>
-                <legend>Remarques et pièces jointes</legend>
+                <legend class="text-primary">Remarques et pièces jointes</legend>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-2 control-label">Remarques</label>
                     <div class="col-xs-12 col-sm-4">
                         <textarea class="form-control" name="remarques" id="remarques"></textarea>
                     </div>
                     <div class="col-xs-12 col-sm-6">
-                        <div id="fileuploader" height=300px; style="overflow: auto">
+                        <div id="fileuploader" height=300>
 
                         </div>
                     </div>
@@ -255,9 +263,8 @@
                 var tableData = new Array();
                 $('#emailsTable tr').each(function (row, tr) {
                     tableData[row] =
-                            {'nom': $(tr).find('td:eq(0)').find('input').val(),
-                                'email': $(tr).find('td:eq(1)').find('input').val(),
-                                'nature': $(tr).find('td:eq(2)').find('select').val()
+                            {'id': $(tr).find('td:eq(0)').find('input').val(),
+                             'nature': $(tr).find('td:eq(1)').find('select').val()
                             };
                 });
                 tableData.shift();

@@ -19,7 +19,8 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Ob\HighchartsBundle\ObHighchartsBundle(),
-            new Liuggio\ExcelBundle\LiuggioExcelBundle()
+            new Liuggio\ExcelBundle\LiuggioExcelBundle(),
+            new diceprime\Bundle\ORMBundle\diceprimeORMBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

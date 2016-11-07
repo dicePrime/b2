@@ -1,0 +1,4 @@
+services:
+#    diceprime_orm.example:
+#        class: diceprime\Bundle\ORMBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
