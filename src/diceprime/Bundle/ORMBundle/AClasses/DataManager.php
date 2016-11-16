@@ -32,11 +32,12 @@ class DataManager {
 
     public function find($id) {
         $sql = "SELECT " . implode(',', DBConfig::$db[$this->entityName]['fields'])
-                . " FROM " . DBConfig::$db['table']
-                . " WHERE " . DBConfig::$db['table']['pk'] . " = :id";
+                . " FROM " . DBConfig::$db[$this->entityName]['table']
+                . " WHERE " . DBConfig::$db[$this->entityName]['pk'] . " = :id";
 
         $stm = $this->connection->prepare($sql);
         $stm->bindValue('id', $id);
+        $stm->execute();
         $results = $stm->fetchAll();
         if (count($results) > 0) {
             return $this->entityArrayToObject($results[0]);
@@ -134,7 +135,7 @@ class DataManager {
                     . "VALUES (:" . implode(",:", DBConfig::$db[$this->entityName]['fields']) . ")";
         }
         foreach (DBConfig::$db[$this->entityName]['fields'] as $field) {
-            $functionName = "get" . ucfirst(DataManager::intoVarNamingForm(DBConfig::$db['fields_mapping'][$field]));
+            $functionName = "get" . ucfirst(DataManager::intoVarNamingForm(DBConfig::$db[$this->entityName]['fields_mapping'][$field]));
             $params[$field] = $entity->$functionName();
         }
         

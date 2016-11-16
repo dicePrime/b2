@@ -45,6 +45,13 @@ class B2BDesRequete {
     function setEmail($email) {
         $this->email = $email;
     }
+    
+    public function setData($data)
+    {
+        $this->setId($data['id']);
+        $this->setEmail($data['email']);
+        $this->setNom($data['nom']);
+    }
 
 
 }

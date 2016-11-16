@@ -49,11 +49,10 @@ class B2BRequeteModel {
     }
     
     
-    public function insertRequete(B2BRequete $requete)
+    public function persist(B2BRequete $b2bRequete)
     {
-           
+        return $this->dataManager->persist($b2bRequete);
     }
-
     
     public function getRequetesByTicket($requetes, $ticket) {
         $resultat = array();

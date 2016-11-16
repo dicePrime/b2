@@ -51,6 +51,12 @@ saisie_requetes:
     options:
         expose: true
         
+insert_requete:
+    path: /requete/insertion
+    defaults: { _controller:AppBundle:SaisieRequetes:insertRequete }
+    options:
+        expose: true
+        
         
         
 ## REST API

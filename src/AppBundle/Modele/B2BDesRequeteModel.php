@@ -9,7 +9,8 @@
 namespace AppBundle\Modele;
 
 use AppBundle\Entity\B2BDesRequete;
-use AppBundle\Commons\Tools;    
+use AppBundle\Commons\Tools;
+use diceprime\Bundle\ORMBundle\AClasses\DataManager;
 /**
  * Description of B2BDesRequeteModel
  *
@@ -18,48 +19,43 @@ use AppBundle\Commons\Tools;
 class B2BDesRequeteModel {
     //put your code here
     
-    public static  $_SELECT_ALL_FROM_B2B_DES_REQUETE = "select * from b2b_des_requete order by nom asc";
-    
-    
+        
     private $connection;
+    private $dataManager;
     
     public function __construct($connection)
     {
         $this->connection = $connection;
+        $this->dataManager = new DataManager("B2BDesRequete", $connection);
     }
-    
-    public function fetchB2BDesRequete($row)
-    {
-      $b2bDes = new B2BDesRequete;
-      
-      $b2bDes->setEmail($row['email']);
-      $b2bDes->setNom($row['nom']);
-      $b2bDes->setId($row['id']);
-            
-      return $b2bDes;
-    }
-    
+     
     public function findAll()
     {
-       try
-      {
-      $req = $this->connection->prepare(B2BDesRequeteModel::$_SELECT_ALL_FROM_B2B_DES_REQUETE);
-      
-      $req->execute();     
-      
-      $resultat = array();
-      
-      while($row = $req->fetch())
-      {
-          $resultat[] = $this->fetchB2BDesRequete($row);
-      }
-      
-      return $resultat;
-      }
-      catch(\Exception $ex)
-      {
-        Tools::writeFile("exceptions/findAllB2BDesRequete.txt", $ex->getMessage());
-        return array();  
-      }  
+      return $this->dataManager->findAll();
+    }
+    
+    /**
+     * Cette fonction prend en paramètre une liste de destinataires d'une requete
+     * et les retourne avec t
+     * @param type $destinatairesRequete
+     */
+    public function findFromListeDestinataires($destinatairesRequete)
+    {
+        $resultat = array();
+        
+        foreach($destinatairesRequete as $dest)
+        {
+            $resultat[] = $this->dataManager->find($dest->getIdDes());
+        }
+    }
+    
+    public function findBy($fields)
+    {
+        return $this->dataManager->findBy($fields);
+    }
+    
+    public function find($id)
+    {
+        return $this->dataManager->find($id);
     }
 }

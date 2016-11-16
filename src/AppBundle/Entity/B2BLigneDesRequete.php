@@ -22,6 +22,8 @@ class B2BLigneDesRequete {
     
     private $idDes;
     
+    private $nature;
+    
     function getId() {
         return $this->id;
     }
@@ -45,5 +47,23 @@ class B2BLigneDesRequete {
     function setIdDes($idDes) {
         $this->idDes = $idDes;
     }
+    
+    function getNature() {
+        return $this->nature;
+    }
+
+    function setNature($nature) {
+        $this->nature = $nature;
+    }
+    
+    public function setData($row)
+    {
+      $this->setId($row['id']);
+      $this->setNature($row['nature']);
+      $this->setIdDes($row['id_des']);
+      $this->setIdRequete($row['id_requete']);
+    }
+
+
     
 }

@@ -29,7 +29,9 @@ class B2BRequete {
     //La date de 
     private $dateTransmission;
     //Le telephone du gestionnaire
-    // private $telephoneGestionnaire;    
+    // private $telephoneGestionnaire;   
+    
+    private $dateCreation;
 
     private $dateCloture;
     private $destinataireDSC;
@@ -50,7 +52,10 @@ class B2BRequete {
     private $operation;
     private $statut;
     private $pJ1; // la chaine des fichiers joints
-    private $fichiersJointsArray; //le tableau des fichiers joints
+    private $fichiersJointsCreation;
+    private $tableauFichiersJointsCreation;
+    private $fichiersJointsTraitement;
+    private $tableauFichiersJointsTraitement;
 
     public function setData($data) {
         $this->setDateCloture($data['Date_Cloture']);
@@ -69,8 +74,11 @@ class B2BRequete {
         $this->setOperation($data['Operation']);
         $this->setRemarquesInitiales($data['Remarques_Initiales']);
         $this->setRemarquesTraitement($data['Remarques_traitement']);
+        $this->setFichiersJointsCreation($data['fichiers_joints_creation']);
+        $this->setFichiersJointsTraitement($data['fichiers_joints_traitement']);
         $this->setNUserInit($data['NUserInit']);
         $this->setNUserCloture($data['NUserCloture']);
+        $this->setDateCreation($data['date_creation']);
         //$this->setInitiateur($data['NomPrenom']);
         $this->setpJ1($data['PJ1']);
     }
@@ -266,5 +274,47 @@ class B2BRequete {
     function setFichiersJointsArray($fichiersJointsArray) {
         $this->fichiersJointsArray = $fichiersJointsArray;
     }
+
+    function getFichiersJointsCreation() {
+        return $this->fichiersJointsCreation;
+    }
+
+    function getTableauFichiersJointsCreation() {
+        return $this->tableauFichiersJointsCreation;
+    }
+
+    function getFichiersJointsTraitement() {
+        return $this->fichiersJointsTraitement;
+    }
+
+    function getTableauFichiersJointsTraitement() {
+        return $this->tableauFichiersJointsTraitement;
+    }
+
+    function setFichiersJointsCreation($fichiersJointsCreation) {
+        $this->fichiersJointsCreation = $fichiersJointsCreation;
+    }
+
+    function setTableauFichiersJointsCreation($tableauFichiersJointsCreation) {
+        $this->tableauFichiersJointsCreation = $tableauFichiersJointsCreation;
+    }
+
+    function setFichiersJointsTraitement($fichiersJointsTraitement) {
+        $this->fichiersJointsTraitement = $fichiersJointsTraitement;
+    }
+
+    function setTableauFichiersJointsTraitement($tableauFichiersJointsTraitement) {
+        $this->tableauFichiersJointsTraitement = $tableauFichiersJointsTraitement;
+    }
+    
+    function getDateCreation() {
+        return $this->dateCreation;
+    }
+
+    function setDateCreation($dateCreation) {
+        $this->dateCreation = $dateCreation;
+    }
+
+
 
 }

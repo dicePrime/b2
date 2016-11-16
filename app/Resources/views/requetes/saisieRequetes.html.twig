@@ -11,7 +11,7 @@
 {% block contenu %}
     <div style='padding-top:50px;'>
         <h4 class="text-success"> > Nouvelle Requête</h4>
-        <form class="form form-horizontal">
+        <form class="form form-horizontal well" id="nouvelleRequeteForm">
             <fieldset >
                 <legend class="text-primary">Informations réclammation</legend>
                 <div class="form-group">
@@ -47,12 +47,12 @@
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-2 control-label">Compte</label>
                     <div class="col-xs-12 col-sm-4">                        
-                        <input type="text" class="form-control" id="numeroTicket" name="compteClient"/>
+                        <input type="text" class="form-control" id="compteClient" name="compteClient"/>
                     </div>
 
                     <label class="col-xs-12 col-sm-2 control-label">Nom du client ou du contact</label>
                     <div class="col-xs-12 col-sm-4">
-                        <input type="text" class="form-control" id="compteClient" name="nomClient"/>
+                        <input type="text" class="form-control" id="nomClient" name="nomClient"/>
                     </div>
                 </div> 
                 <div class="form-group">
@@ -67,7 +67,7 @@
 
                     <label class="col-xs-12 col-sm-2 control-label">Ligne</label>
                     <div class="col-xs-12 col-sm-4">
-                        <input type="text" class="form-control" id="compteClient" name="nomClient"/>
+                        <input type="text" class="form-control" id="ligne" name="ligne"/>
                     </div>
                 </div>
             </fieldset>
@@ -122,7 +122,7 @@
 
             <div class="form-group">
                 <div class="col-xs-12 col-sm-4 col-sm-offset-4">                        
-                    <input type="submit" class="btn btn-block orangeElement" style="color:white" value="Enregistrer"/>
+                    <input type="submit" class="btn btn-block orangeElement" id="btnSubmit" style="color:white" value="Enregistrer"/>
                 </div>
                 <div  style="display:inline" class="col-xs-12 col-sm-4">
                     <img src="{{ asset('img/ajax_loader.gif') }}" height="30" width="30" hidden  id="loadingResponse"/>
@@ -146,6 +146,13 @@
 
             $("#btnAdd").bind('click', Add);
             $(".btnDelete").bind('click', Delete);
+                                   
+            $("#nouvelleRequeteForm").on("submit", function(e){
+                
+                e.preventDefault();                
+                Submit();
+            });
+            
             $("#fileuploader").uploadFile({
                 url: Routing.generate('upload_files'),
                 dragDropStr: "<span><b>cliquez pour en sélectionner les fichiers</b></span>",
@@ -203,7 +210,6 @@
 
             function Submit()
             {
-
                 var dateReception = $("#dateReception").val();
                 var source = $("#source").val();
                 var operation = $("#operation").val();
@@ -223,7 +229,7 @@
                     'ligne': ligne,
                     'destinataires': destinataires,
                     'remarques': remarques};
-                var route = Routing.generate('saisie_requetes');
+                var route = Routing.generate('insert_requete');
                 var redirect_route = Routing.generate('listing_requetes');
                 $("#loadingResponse").toggle();
                 $('#reponse').html("<span style='color:orange'>Enregistrement en cours...</span>");
@@ -248,7 +254,7 @@
                     },
                     error: function (json)
                     {
-                        $("#reponse").html("<span class='nok'> Impossible d'enregistrer la demande</span>");
+                        $("#reponse").html("<span class='nok'> Impossible d'enregistrer la requete</span>");
                         $("#loadingResponse").toggle();
                     }
                 });
@@ -263,7 +269,7 @@
                 var tableData = new Array();
                 $('#emailsTable tr').each(function (row, tr) {
                     tableData[row] =
-                            {'id': $(tr).find('td:eq(0)').find('input').val(),
+                            {'id': $(tr).find('td:eq(0)').find('select').val(),
                              'nature': $(tr).find('td:eq(1)').find('select').val()
                             };
                 });

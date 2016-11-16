@@ -30,7 +30,7 @@ class UploaderController extends Controller {
 
     public function uploadAction() {
         
-        $ds = DIRECTORY_SEPARATOR;  // On récupère le séparateur du système de fichier
+        $ds = "/";  // On récupère le séparateur du système de fichier
         $request = $this->getRequest(); // On récupère la requête associée
         $session = $request->getSession(); // On récupère la session
         
@@ -81,7 +81,7 @@ class UploaderController extends Controller {
      */
     public function deleteFileAction()
     {
-        $ds = DIRECTORY_SEPARATOR;  //1
+        $ds = "/";  //1
         $request = $this->getRequest();
         $session = $request->getSession();
         

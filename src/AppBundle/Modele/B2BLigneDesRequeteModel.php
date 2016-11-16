@@ -8,17 +8,41 @@
 
 namespace AppBundle\Modele;
 
+use AppBundle\Entity\B2BLigneDesRequete;
+use diceprime\Bundle\ORMBundle\AClasses\DataManager;
+
 /**
  * Description of B2BLigneDesRequeteModel
  *
  * @author BMHB8456
  */
 class B2BLigneDesRequeteModel {
+
     //put your code here
+
+    private $connection;
+    private $dataManager;
+
+    public function __construct($connection) {
+        $this->connection = $connection;
+        $this->dataManager = new DataManager("B2BLigneDesRequete", $connection);
+    }
+
+    public function findAll() {
+        return $this->dataManager->findAll();
+    }
     
-    public static $_GET_LIGNES_DES_REQUETES_FOR_REQUETE = "SELECT * FROM b2b_ligne_des_requete where id_requete = :idRequete";
+    public function persist(B2BLigneDesRequete $b2bLigneDesRequete)
+    {
+       $this->dataManager->persist($b2bLigneDesRequete); 
+    }
     
-    public static $_INSERT_INTO_LIGNE_DES_REQUETE = "INSERT INTO b2b_ligne_des_requete(id_res, id_requete) values(:idRes, :idRequete)";
-    
-    //public static $_UPDATE_LIGNE_DES_REQUETE = "UPDATE b2b_ligne_des_requete set id_res =: idRes, id_requete"
+    public function persistMany($b2bLignesDesRequete)
+    {
+        foreach($b2bLignesDesRequete as $b2bLigneDesRequete)
+        {
+            $this->persist($b2bLigneDesRequete);
+        }
+    }
+
 }
