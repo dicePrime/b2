@@ -192,8 +192,10 @@ class SaisieRequetesController extends Controller {
             $messenger->setTo($emails);
 
             $messenger->setCc($ccEmails);
-
-
+            
+            $messenger->setSubject("Nouvelle requête");
+            
+            $messenger->setPriority(1);
 
             $messenger->setBody($this->renderView('emails/nouvelleRequete.html.twig', array('base_dir' => realpath($this->container->getParameter('kernel.root_dir') . '/..'),
                         'requete' => $requete)), 'text/html');

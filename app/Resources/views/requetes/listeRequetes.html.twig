@@ -86,8 +86,10 @@
                 <table class="table table-bordered table-condensed table-striped toDataTable" style="font-size:90%">
                     <thead class="orangeElement" style="color:white">
                         <tr>
-                            <th>Afficher</th><th>Editer</th>
-                            <th>Date reception<th>Ticket</th>
+                            <th>Afficher/Editer</th>
+                            <th>Date reception</th>
+                            <th>N° Requete</th>
+                            <th>Ticket</th>
                             <th>Compte</th><th>Client</th><th>Opération</th>
                             <th>Statut</th><th>Initiateur</th>
                         </tr>
@@ -95,12 +97,13 @@
                     <tbody>
                         {% for requete in requetes %}
                             <tr>
-                                <td><a href="#"><span class="glyphicon glyphicon-eye-open" title="Afficher"></span></a></td>
-                                <td><a href="#"><span class="glyphicon glyphicon-edit" title ="Editer"></span></a></td>
-                                <td>{{ requete.dateReception }}</td><td>{{ requete.numeroTicket }}</td>
+                                <td><a href="{{ path('details_requete', {'nRequete': requete.nRequete} ) }}"><span class="glyphicon glyphicon-edit" title="Afficher"></span></a></td>
+                                <td>{{ requete.nRequete }}</td>
+                                <td>{{ requete.dateReception }}</td>                              
+                                <td>{{ requete.numeroTicket }}</td>
                                 <td>{{ requete.compteClient }}</td><td>{{ requete.nomClient }}</td>
                                 <td>{{ requete.operation }}</td><td>{{ requete.statut }}</td>
-                                <td>{{ requete.initiateur }}</td>
+                                <td>{{ requete.nUserInit }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>

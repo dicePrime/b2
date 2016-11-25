@@ -1,0 +1,83 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %} 
+    <link href="{{ asset('css/jquery.dataTables.css') }}" rel="stylesheet" type="text/css" />
+    {{ parent() }}
+    <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/buttons.dataTables.min.css') }}" />
+{% endblock %}
+
+{% block contenu %}
+    
+    <div class="row" style="padding-top: 25px;">
+        <div class="col-xs-12">
+            <ol class="breadcrumb">
+                <li class="active">Activations hebdomadaires par client</li>      
+            </ol>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-xs-1 pull-right'>
+            <button class='btn btn-success' id='btnExport'><span class='glyphicon glyphicon-export' style='font-size:1.5em'></span></button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+
+            <table class="table table-condensed display" cellspacing="0" width="100%" id='activationsHebdo'>
+                <thead class='orangeElement whiteText'>
+                    <tr>
+                        <th>Année</th><th>Semaine</th><th>Compte</th>
+                        <th>Intitulé</th><th>Formule</th><th>Type</th>
+                        <th>Parc</th><th>Activation</th><th>Suspension</th>
+                        <th>Résiliation</th>                            
+                    </tr>
+                </thead>
+
+                
+                    
+            </table>
+        </div>
+    </div>
+
+    <input type="hidden" value="" id="currentYearStat"/>
+
+{% endblock %}
+{% block scripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/moment.js') }}"></script>
+    <script src="{{ asset('js/jquery.table2excel.js') }}"></script>
+    <script src="{{ asset('js/highcharts.js') }}"></script>
+    <script src="{{ asset('js/exporting.js') }}"></script>
+    <script src="{{ asset('js/jquery.dataTables.js') }}" type="text/javascript"></script> 
+    <script src="{{ asset('js/dataTables.tableTools.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/dataTables.buttons.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/buttons.flash.min.js') }}" type="text/javascript"></script> 
+    <script>
+        $(document).ready(function () {
+            $("#syntheseHebdo").addClass('active');
+            $('#activationsHebdo').dataTable({
+                    
+                     serverSide: true,
+                     processing: true,
+                     ajax:{
+                        url: Routing.generate('activation_hebdo_par_client'),
+                        type: 'POST'
+                    },
+                    "columns":[
+                        {"data": "ANNEE" },
+                        {"data": "SEM"},
+                        {"data": "CUSTCODE"},
+                        {"data": "INTITULE"},
+                        {"data": "DES"},
+                        {"data": "TYPE1"},
+                        {"data": "CB1"},
+                        {"data": "ACT1"},
+                        {"data": "SUSP1"}
+                    ]
+                });
+
+        });
+    </script>
+{% endblock %}

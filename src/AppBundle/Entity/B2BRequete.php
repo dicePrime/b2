@@ -56,16 +56,23 @@ class B2BRequete {
     private $tableauFichiersJointsCreation;
     private $fichiersJointsTraitement;
     private $tableauFichiersJointsTraitement;
+    private $commentairesRequete;
+    private $issue;
+    private $detailsIssue;
 
     public function setData($data) {
+        try
+        {
+        //print_r("dans setData");
         $this->setDateCloture($data['Date_Cloture']);
         $this->setDateReception($data['Date_reception']);
         $this->setDateTransmission($data['Date_transmission']);
         $this->setDestinataireDSC($data['Destinataire_dsc']);
         //$this->setResponsableDSC($data['Responsable_dsc']);
-        $this->setLigneConcernee($data['Ligne']);
+        $this->setLigne($data['Ligne']);
         $this->setNAscom($data['NAscom']);
         $this->setNumeroTicket($data['NumeroTicket']);
+        $this->setNRequete($data['NRequete']);
         //$this->setDateCreation($data['date_creation']);
         //$this->setOperation($data['operation']);
         $this->setNomClient($data['Nom_Client']);
@@ -77,10 +84,25 @@ class B2BRequete {
         $this->setFichiersJointsCreation($data['fichiers_joints_creation']);
         $this->setFichiersJointsTraitement($data['fichiers_joints_traitement']);
         $this->setNUserInit($data['NUserInit']);
-        $this->setNUserCloture($data['NUserCloture']);
+        $this->setNUserCloture($data['NuserCloture']);
         $this->setDateCreation($data['date_creation']);
         //$this->setInitiateur($data['NomPrenom']);
         $this->setpJ1($data['PJ1']);
+        $this->setIssue($data['issue']);
+        $this->setDetailsIssue($data['details_issue']);
+        $this->setDateCloture($data['Date_Cloture']);
+        
+        $fichiersJointsArray = preg_split("#;#", $this->getFichiersJointsCreation());
+        $this->setTableauFichiersJointsCreation($fichiersJointsArray);
+        
+       
+        //print_r($this);
+        }
+        catch(\Exception $ex)
+        {
+            print_r($ex->getMessage());
+            
+        }
     }
 
     function getNRequete() {
@@ -314,7 +336,29 @@ class B2BRequete {
     function setDateCreation($dateCreation) {
         $this->dateCreation = $dateCreation;
     }
+    function getCommentairesRequete() {
+        return $this->commentairesRequete;
+    }
 
+    function setCommentairesRequete($commentairesRequete) {
+        $this->commentairesRequete = $commentairesRequete;
+    }
+    
+    function getIssue() {
+        return $this->issue;
+    }
+
+    function getDetailsIssue() {
+        return $this->detailsIssue;
+    }
+
+    function setIssue($issue) {
+        $this->issue = $issue;
+    }
+
+    function setDetailsIssue($detailsIssue) {
+        $this->detailsIssue = $detailsIssue;
+    }
 
 
 }

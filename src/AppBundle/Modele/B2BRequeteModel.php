@@ -32,11 +32,14 @@ class B2BRequeteModel {
     
     private $connection;
     private $dataManager;
+    private $commentaireRequeteDataManager;
 
-    public function __construct($connection) {
+    public function __construct($connection) 
+    {
 
         $this->connection = $connection;
         $this->dataManager = new DataManager("B2BRequete", $connection);
+        $this->commentaireRequeteDataManager = new DataManager("B2BCommentaireRequete", $connection);
     }
     
     /**
@@ -46,6 +49,19 @@ class B2BRequeteModel {
     public function updateB2BRequete(B2BRequete $b2bRequete)
     {
         
+    }
+    
+    public function getRequeteByNRequete($nRequete)
+    {
+        $requete =  $this->dataManager->find($nRequete);
+        
+        $fields = array(array('champ'=>'id_requete','condition'=> array('condition' => '=', 'valeur' =>$requete->getNRequete())));
+        
+        $commentaires = $this->commentaireRequeteDataManager->findBy($fields);
+        
+        $requete->setCommentairesRequete($commentaires);
+        
+        return $requete;
     }
     
     
@@ -122,7 +138,8 @@ class B2BRequeteModel {
         try {
             $resultat = $this->dataManager->findBy(array(array('champ'=>'Date_reception','condition'=> array('condition' => '>=', 'valeur' =>$dateDebut)),
                                          array('champ'=>'Date_reception','condition' => array('condition' => '<=', 'valeur'=> $dateFin))));
-                       
+                     
+           
             if ($ticket != null and (  strlen($ticket) > 1 )) {
                 $resultat = $this->getRequetesByTicket($resultat, $ticket);
             }

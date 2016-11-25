@@ -49,7 +49,6 @@ class ListingRequetesController extends Controller {
         $etatParam = $request->get('etat');
         $nomClientParam = $request->get('nomClient');
         
-        //print_r($operationParam);
         
         if(NULL == $request->getSession()->get('listeOperations'))
         {
@@ -63,14 +62,16 @@ class ListingRequetesController extends Controller {
             $session->set('etats', array('Ouvert', 'Fermé'));
         }
         
-        //print_r($etatParam);
         
        if (null == $debut && null == $fin && null == $ticket && null == $compteParam &&
                 null == $operationParam && null == $etatParam && null == $nomClientParam) {
-            $requetes = array();
+                $requetes = array();
+            
         } else {
             $requetes = $b2bRequeteModel->getB2BRequetes($debut, $fin, $ticket, $compteParam, $operationParam, $etatParam, $nomClientParam);
-        }
+            
+        }      
+        
 
        
         return $this->render('requetes/listeRequetes.html.twig', array(

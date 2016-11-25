@@ -9,45 +9,44 @@
         <meta name="author" content="">
     </head>
     <body>
-        <h1 style="float:left;color:orange"><a href="http://localhost/b2/web/app_dev.php"><strong>Beetoo</strong></a></h1>
+        <h1 style="float:left;color:orange"><strong>Beetoo</strong></a></h1>
         <div style='padding-top:50px;'>
-            <h2 style="color:orange">  Nouvelle Requête</h2>
-            <fieldset >
+            <fieldset>
                 <legend class="text-primary">Informations réclammation</legend>
-                <table>
+                <table style='border:solid;border-width:1px;width: 100%;border-color:rgb(176,33,26)'>
                     <thead>
-                        <tr><th>Date de réception</th><th>Date de création</th><th>Source</th><th>Opération</th></tr>
+                        <tr><th style='border:solid;border-width:1px;border-color:rgb(176,33,26)'>Date de réception</th>
+                            <th style='border:solid;border-width:1px;border-color:rgb(176,33,26)'>Date de création</th>
+                            <th style='border:solid;border-width:1px;border-color:rgb(176,33,26)'>Source</th>
+                            <th style='border:solid;border-width:1px;border-color:rgb(176,33,26)'>Opération</th></tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{ requete.dateReception }}</td><td>{{ requete.dateCreation }}</td>
-                            <td>{{ requete.source }}</td><td>{{ requete.operation }}</td>
+                            <td style='border:solid;border-width:1px;border-color:rgb(176,33,26)'>{{ requete.dateReception }}</td><td style='border:solid;border-width:1px;width: 100%;border-color:rgb(176,33,26)'>{{ requete.dateCreation }}</td>
+                            <td style='border:solid;border-width:1px;border-color:rgb(176,33,26)'>{{ requete.source }}</td><td style='border:solid;border-width:1px;width: 100%;border-color:rgb(176,33,26)'>{{ requete.operation }}</td>
                         </tr>
                     </tbody>
                 </table>
             </fieldset>
             <fieldset >
                 <legend class="text-primary">Données client</legend>
-                <table>
+                <table style='border:solid;border-width:1px;width: 100%;border-color:rgb(176,33,26)'>
                     <thead>
-                        <tr><th>Compte</th><th>Nom du client/contact</th><th>Commercial associé</th><th>Ligne</th></tr>
+                        <tr><th style='border:solid;border-width:1px;border-color:rgb(176,33,26)'>Compte</th>
+                            <th style='border:solid;border-width:1px;border-color:rgb(176,33,26)'>Nom du client/contact</th>
+                            <th style='border:solid;border-width:1px;border-color:rgb(176,33,26)'>Commercial associé</th><th>Ligne</th></tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{ requete.compteClient }}</td><td>{{ requete.nomClient }}</td>
-                            <td></td><td>{{ requete.ligne }}</td>
+                            <td style='border:solid;border-width:1px;border-color:rgb(176,33,26)'>{{ requete.compteClient }}</td><td>{{ requete.nomClient }}</td>
+                            <td style='border:solid;border-width:1px;border-color:rgb(176,33,26)'></td>
+                            <td style='border:solid;border-width:1px;border-color:rgb(176,33,26)'>{{ requete.ligne }}</td>
                         </tr>
                     </tbody>
                 </table>    
             </fieldset>
-            <fieldset>
-                <legend class="text-primary">Remarques et pièces jointes</legend>
-                <p>
-                <center>{{ requete.remarquesInitiales }}</center>
-                </p>
-
-            </fieldset>
-            <p> Veuillez vous connecter à l'outil pour plus d'informations</p>
+           
+            <p> Veuillez vous connecter à l'outil pour plus d'informations sur la requête</p>
         </div>
     </body>
 </html>

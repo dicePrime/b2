@@ -1,8 +1,17 @@
 {% extends '::base.html.twig' %}
 
 {% block contenu %}
-  
-
+     <div class="row" style="padding-top: 25px;">
+        <div class="col-xs-12">
+            <ol class="breadcrumb">
+              
+                <li class="active">Suivi parc</li>      
+            </ol>
+        </div>
+    </div>
+    
+{{ include('::suiviparc/form.html.twig') }}
+    
 {% endblock %}
 
 {% block scripts %}

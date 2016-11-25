@@ -47,13 +47,70 @@ class DataManager {
     }
 
     public function entityArrayToObject($array) {
+        
+        //print_r($array);
         $entityClass = DBConfig::$db[$this->entityName]['class'];
         $object = new $entityClass();
-        //print_r($array);
         $object->setData($array);
         return $object;
+        
+       
+    }
+    
+    public function countAll()
+    {
+        $query ="SELECT COUNT(*) FROM ".DBConfig::$db[$this->entityName]['table'];
+        $stm = $this->connection->prepare($query);
+        
+        $stm->execute();
+        
+        $result = $stm->fetch();
+        
+        return $result['COUNT(*)'];
     }
 
+    public function select($where = "", $order = "", $limit = null, $offset = null) {
+        $query = 'SELECT ' . implode(",", DBConfig::$db[$this->entityName]['fields']) . ' FROM ' . DBConfig::$db[$this->entityName]['table']
+                . (($where) ? ' WHERE' . $where : "")
+                . (($limit) ? ' LIMIT' . $limit : "")
+                . (($offset && $limit) ? ' OFFSET' . $offset : "")
+                . (($order) ? ' ORDER BY' . $order : "");
+        
+        
+        
+        $stm = $this->connection->prepare($query);
+        
+        try
+        {
+        $stm->execute();
+        }
+        catch(\Exception $ex)
+        {
+            $fichier = fopen('testSelect.txt', 'w+');
+            fputs($fichier, print_r($ex->getMessage()));
+            fclose($fichier);
+        }
+         
+        
+        $results = $stm->fetchAll();
+         
+        $output = array();
+        $taille = count($results);
+        $i = 0;
+        if ($taille > 0) {
+            
+            
+            for ($j = 0; $j < $taille; $j++) 
+            {
+                
+                $output[] = $this->entityArrayToObject($results[$j]);
+            }
+        }
+        //print_r($output);
+        return $output;
+    }
+
+    
     public function findBy($fields = array()) {
         $sql = "SELECT " . implode(",", DBConfig::$db[$this->entityName]['fields'])
                 . " FROM " . DBConfig::$db[$this->entityName]['table'];
@@ -72,15 +129,25 @@ class DataManager {
                 
             }
         }
+      
         $stm = $this->connection->prepare($sql);
         $stm->execute();
+         
         $results = $stm->fetchAll();
+         
         $output = array();
-        if (count($results) > 0) {
-            foreach ($results as $row) {
-                $output[] = $this->entityArrayToObject($row);
+        $taille = count($results);
+        $i = 0;
+        if ($taille > 0) {
+            
+            
+            for ($j = 0; $j < $taille; $j++) 
+            {
+                
+                $output[] = $this->entityArrayToObject($results[$j]);
             }
         }
+        //print_r($output);
         return $output;
     }
     
@@ -94,14 +161,19 @@ class DataManager {
         return $value;
     }
 
-    
+      
     public function findAll($indexedBy = "") {
         $sql = "SELECT " . implode(",", DBConfig::$db[$this->entityName]['fields'])
                 . " FROM " . DBConfig::$db[$this->entityName]['table'];
         $stm = $this->connection->prepare($sql);
+        
         $stm->execute();
+        
         $results = $stm->fetchAll();
         
+        
+        
+        //print_r($results);
         $output = array();
         if (count($results) > 0) {
             if ($indexedBy !== "") {
@@ -116,6 +188,7 @@ class DataManager {
                 }
             }
         }
+        
         return $output;
     }
 

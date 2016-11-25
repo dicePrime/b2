@@ -1,0 +1,401 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %} 
+    {{ parent() }}
+    <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/dropzone.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/uploadfile.css') }}"/>
+{% endblock %}
+
+{% block contenu %}
+    <div class="row" style="padding-top: 25px;">
+        <div class="col-xs-12">
+            <ol class="breadcrumb">
+                <li><a href="{{ path('listing_requetes') }}">Requetes</a></li>
+                <li class="active">Requete - {{ requete.nRequete }}</li>      
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#details">Détails</a></li>
+                <li><a data-toggle="tab" href="#actions">Actions</a></li>
+            </ul>
+            {% if requete.statut == 'Fermé' %}
+            <div class="alert 
+                 {% if requete.issue == 'OK' %}
+                 alert-success
+                 {% else %}alert-danger{% endif %}" role="alert" style="padding-top:25px;">
+                <span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                <span class="sr-only">:</span>
+                Cette requête est cloturée avec pour issue <strong>{{ requete. issue }}</strong>
+            </div>
+            {% endif %}
+            <div class="tab-content">
+                <div id="details" class="tab-pane fade in active" style="padding-top:50px;">
+                    <table class="table table-bordered table-condensed table-striped">
+                        <tr>
+                            <th colspan="2" class="orangeActive center whiteText" style="text-align:center">Informations Réclation</th>
+                        </tr>
+                        <tr>
+                            <th>Date de réception</th><td>{{ requete.dateReception }}</td>
+                        </tr>
+                        <tr>
+                            <th>Opération</th><td>{{ requete.operation }}</td>
+                        </tr>
+                        <tr>
+                            <th>Source</th><td>{{ requete.source }}</td>
+                        </tr>
+
+                        <tr>
+                            <th colspan="2" class="center orangeActive whiteText">Données client</th>
+                        </tr>
+                        <tr>
+                            <th>Compte</th><td>{{ requete.compteClient }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nom du client ou contact</th><td>{{ requete.nomClient }}</td>
+                        </tr>
+                        <tr>
+                            <th>Commercial</th><td>{#{{ requete.nomCommercial }}#}</td>
+                        </tr>
+                        <tr>
+                            <th>Ligne</th><td>{{ requete.ligne }}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2" class="center orangeActive whiteText">Destinataire</th>
+                        </tr>
+                        {#
+                            {% for destinataire in destinataires %}
+                            <tr>
+                                <td colspan="2"></td>
+                            </tr>
+                        #}
+
+                        <tr>
+                            <th colspan="2" class="center orangeActive whiteText">Documents</th>
+                        </tr>
+
+                        {% for pieceJointe in requete.tableauFichiersJointsCreation %}
+                            <tr>
+                                {% set downloadLink = ["uploads","/requetes/", requete.nRequete, "/", pieceJointe] | join %}
+                                <th>{{ pieceJointe }}</th><td class ="center"><a  href="{{ asset(downloadLink) }}" target="_blank"><span class="glyphicon glyphicon-download-alt"></span></a></td>
+                            </tr>
+
+                        {% endfor %}
+
+                        <tr>
+                            <th colspan="2" class="center orangeActive whiteText">Remarques</th>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="center">{{ requete.remarquesInitiales }}</td>
+                        </tr>
+
+                    </table>
+                </div>
+                <div id="actions" class="tab-pane fade">
+                    <div class="row" style="padding-top:50px;">
+                        <div class="col-xs-6">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Commentaires</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <blockquote>
+                                        <p>
+                                            {{requete.remarquesInitiales }}
+                                        </p>
+                                        <footer>
+                                            {{ requete.dateCreation }}, - (Commentaire à la création)
+                                        </footer>
+                                    </blockquote>
+                                    <div id='listeCommentaires' style='height: 300px;overflow: auto'>
+                                        {% for commentaire in requete.commentairesRequete %}
+
+                                            <blockquote>
+                                                <p>
+                                                    {{ commentaire.commentaire }}
+                                                </p>
+                                                <footer>
+                                                    {{ commentaire.dateCommentaire }}, <strong>{{ commentaire.nomUtilisateur }}</strong>
+                                                </footer>
+                                            </blockquote>
+                                        {% endfor %}
+                                    </div>
+                                    <form class="form-horizontal" id='nouveauCommentaireForm'>
+                                        <div class="form-group">
+                                            <div class="col-xs-12">
+                                                <textarea class="form-control" placeholder="Saisir un commentaire" id='nouveauCommentaire' name='nouveauCommentaire' rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-xs-12">
+                                                <center><input type="submit" class="btn btn-block orangeElement whiteText" value="Ajouter un commentaire"/></center>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="panel 
+                                 {% if requete.issue == 'OK' %} panel-success 
+                                     {% elseif  requete.issue == 'NOK' %}
+                                         panel-danger
+                                    {% else %} 
+                                         panel-warning
+                                    {% endif %}">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Fin du traitement de la requête</h3>
+                                </div>
+                                <div class="panel-body">
+                                    {% if requete.statut != 'Fermé' %}
+                                    <form class="form-vertical" id='clotureForm'>
+                                        <div class="form-group">
+
+
+                                            <label>Issue</label>
+                                            <select class="form-control" id="issue" name="issue">
+                                                <option value="OK">Résolu</option>
+                                                <option value="NOK">Non résolu</option>
+                                            </select>
+
+                                        </div>
+
+                                        <div class="form-group">                                           
+
+                                            <label>Détails sur l'issue</label>
+                                            <textarea class="form-control" id='detailsIssue' name='detailsIssue' rows="5"></textarea>
+                                        </div>
+
+                                        <center><img src="{{ asset('img/ajax_loader.gif') }}" height="30" width="30"  id="loadingResponse" hidden/>
+                                            <span id="reponse"></span></center>
+                                        <center><input type="submit" class="btn btn-block orangeElement whiteText" value="Cloturer la requête"/></center>
+                                        </form>
+                                    {% else %}
+                                        <dl>
+                                            <dt>Issue</dt>
+                                            <dd>
+                                                <label class="label 
+                                                       {% if requete.issue == 'OK' %}
+                                                           label-success
+                                                        {% else %}label-danger{% endif %}">
+                                                
+                                                    {{ requete.issue }}</label></dd>
+                                                
+                                        </dl>
+                                        <p style='word-wrap: break-word;'>
+                                        <h4>Détails de l'issue</h4>
+                                        {{ requete.detailsIssue }}
+                                        </p>
+                                    {% endif %}
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <input type='hidden' value='{{ app.session.get('utilisateur').nom }}' id='nomUtilisateur'/> 
+
+</div>
+<div class="row">
+    <div class="col-xs-12">
+
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/moment.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-datetimepicker.js') }}"></script>
+    <script src="{{ asset('js/jquery.uploadfile.min.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+
+            $("#btnAdd").bind('click', Add);
+            $(".btnDelete").bind('click', Delete);
+
+            $("#nouveauCommentaireForm").on("submit", function (e) {
+
+                e.preventDefault();
+                SubmitCommentaire();
+            });
+
+            $("#clotureForm").on("submit", function (e) {
+                e.preventDefault();
+                SubmitCloture();
+            })
+
+            $("#fileuploader").uploadFile({
+                url: Routing.generate('upload_files'),
+                dragDropStr: "<span><b>cliquez pour en sélectionner les fichiers</b></span>",
+                multiple: true,
+                showDelete: true,
+                dragDrop: true,
+                returnType: "json",
+                deleteCallback: function (data, pd)
+                {
+
+                    var fileName = pd.filename[0].childNodes[0].data.split(" ")[1].trim();
+                    $.ajax({
+                        url: Routing.generate('delete_file'),
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {'filename': fileName},
+                        success: function (data)
+                        {
+                            console.log('file deleted');
+                        },
+                        error: function ()
+                        {
+                            console.log('error while deleting files');
+                        }
+                    });
+
+
+                }
+            });
+            $('#debut').datetimepicker({
+                format: 'YYYY-MM-DD HH:mm:ss',
+                locale: 'fr'
+            }
+            );
+            var newRowHtml = initNewRowHtml();
+            function initNewRowHtml()
+            {
+                var chaine = $("#source").html();
+                return "<tr>" + chaine + "</tr>";
+            }
+
+            function Add()
+            {
+                $('#emailsTable tbody').append(newRowHtml);
+                $('.btnDelete').bind('click', Delete);
+            }
+
+            function Delete()
+            {
+                //on recupère le parent de l'élément
+                var par = $(this).parent().parent();
+                // on supprime ce parent (la ligne)
+                par.remove();
+            }
+
+            function SubmitCloture()
+            {
+                var detailsIssue = $("#detailsIssue").val();
+                var issue = $("#issue").val();
+                var idRequete = {{ requete.nRequete }};
+
+                var data = {
+                    'detailsIssue': detailsIssue,
+                    'issue': issue,
+                    'idRequete': idRequete
+                };
+                var route = Routing.generate('cloture_requete');
+                var redirectRoute = Routing.generate('details_requete', {'nRequete':idRequete });
+                $("#loadingResponse").toggle();
+                $('#reponse').html("<span style='color:orange'>Enregistrement en cours...</span>");
+                $.ajax({
+                    url: route,
+                    type: 'POST',
+                    data: data,
+                    dataType: 'json',
+                    success: function (json)
+                    {
+
+                        if (json['resultat'] === 'OK')
+                        {                            
+                            $("#reponse").html("<span class='ok'>" + json['message'] + "</span>");
+                            $("#loadingResponse").toggle();
+                            window.location = redirectRoute;
+                            
+                        } else
+                        {
+                            $("#reponse").html("<span class='nok'>" + json['message'] + "</span>");
+                            $("#loadingResponse").toggle();
+                        }
+
+                    },
+                    error: function (json)
+                    {
+                        $("#reponse").html("<span class='nok'> Impossible d'enregistrer la requete</span>");
+                        $("#loadingResponse").toggle();
+                    }
+                });
+
+
+            }
+
+            function SubmitCommentaire()
+            {
+                var commentaire = $("#nouveauCommentaire").val();
+                var date = new Date();
+                var dateCommentaire = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+                var nomUtilisateur = $("#nomUtilisateur").val();
+
+                var nouvelElement = "<blockquote><p>" + commentaire + "</p>" +
+                        "<footer>" + dateCommentaire + ",<strong> " + nomUtilisateur + "</strong></footer></blockquote>";
+
+                var data = {
+                    'commentaire': commentaire,
+                    'idRequete':{{ requete.nRequete }}
+                };
+                var route = Routing.generate('insert_commentaire_requete');
+                
+                $.ajax({
+                    url: route,
+                    type: 'POST',
+                    data: data,
+                    dataType: 'json',
+                    success: function (json)
+                    {
+
+                        if (json['resultat'] === 'OK')
+                        {
+                            $("#listeCommentaires").append(nouvelElement);
+                          
+                        } else
+                        {
+                            
+                        }
+
+                    },
+                    error: function (json)
+                    {
+                       
+                    }
+                });
+            }
+
+            /**
+             * Cette fonction retourne la liste des réparations leurs id
+             * @returns {undefined}
+             */
+            function getTableValues()
+            {
+                var tableData = new Array();
+                $('#emailsTable tr').each(function (row, tr) {
+                    tableData[row] =
+                            {'id': $(tr).find('td:eq(0)').find('select').val(),
+                                'nature': $(tr).find('td:eq(1)').find('select').val()
+                            };
+                });
+                tableData.shift();
+                return tableData;
+            }
+        });
+    </script>
+{% endblock %}

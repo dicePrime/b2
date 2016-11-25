@@ -15,6 +15,11 @@ namespace AppBundle\Commons;
  */
 class Tools {
 
+    public static $_NET_ADD = 'NETADD';
+    public static $_RESILIATION = 'RESILIATION';
+    public static $_ACTIVATION = 'ACTIVATION';
+    public static $_PARC = 'PARC';
+    public static $_TOTAL = 'TOTAL';
     //put your code here
     public static $_MONTHS = array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
     public static $_MONTHS_BY_INDEX = array('01' => "Jan", "02" => "Fev", "03" => "Mar",

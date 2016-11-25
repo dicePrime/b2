@@ -1,0 +1,78 @@
+<div id="statModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+
+        <div class="modal-content" id="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Evolution des activations</h4>
+            </div>
+            <div class="modal-body">
+
+                <div style='padding-top:50px;'>
+                    <div class="row">
+                        <div class="col-xs-12" >
+                            <div class='panel panel-default' style='border-color:#e67e22;border-width: 1px;'>
+                                <div class='panel-heading' style='background-color:#e67e22'>
+                                </div>
+                                <div class='panel-body'>
+                                    <center>
+                                        <div class="loadingData" style="height: 500px;width: 500px;">
+                                            <img src="{{ asset('img/Preloader_rubik.gif') }}" style="height: 400px; width: 400px;"/>
+                                        </div>
+                                    </center>
+                                    <div id="totalChart" style="min-width: 150px; height: 500px; margin: 0 auto"></div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class='panel panel-warning'>
+                                <div class='panel-heading'>
+                                    CA par année
+                                </div>
+                                <div class='panel-body'>
+                                    <center>
+                                        <div class="loadingData" style="height: 500px;width: 500px;">
+                                            <img src="{{ asset('img/Preloader_rubik.gif') }}" style="height: 400px; width: 400px;"/>
+                                        </div>
+                                    </center>
+                                    <div id="mobileChart" style="min-width: 150px; height: 500px; margin: 0 auto"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class='panel panel-info'>
+                                <div class='panel-heading'>
+                                    Parc par année
+                                </div>
+                                <div class='panel-body'>
+                                    <center>
+                                        <div class="loadingData" style="height: 500px;width: 500px;">
+                                            <img src="{{ asset('img/Preloader_rubik.gif') }}" style="height: 400px; width: 400px;"/>
+                                        </div>
+                                    </center>
+                                    <div id="internetChart" style="min-width: 150px; height: 500px; margin: 0 auto"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>

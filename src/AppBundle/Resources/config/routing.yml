@@ -24,6 +24,12 @@ listing_ca:
     defaults: { _controller:AppBundle:SuiviCA:listingCA }
     options:
         expose: true
+        
+synthese_ca:
+    path: /synthese_ca
+    defaults: { _controller:AppBundle:SyntheseCA:index }
+    options:
+        expose: true
 
 list_ca:
     path: /list_ca
@@ -57,6 +63,23 @@ insert_requete:
     options:
         expose: true
         
+details_requete:
+    path: /details_requete/{nRequete}
+    defaults: { _controller:AppBundle:DetailsRequete:details }
+    options:
+        expose: true
+        
+insert_commentaire_requete:
+    path: /commentaire_requete/nouveau
+    defaults: { _controller: AppBundle:DetailsRequete:insertCommentaireRequete }
+    options:
+        expose: true
+        
+cloture_requete:
+    path: /traitement_requete/cloture
+    defaults: { _controller: AppBundle:DetailsRequete:clotureRequete }
+    options:
+        expose: true
         
         
 ## REST API
@@ -77,5 +100,33 @@ upload_files:
 delete_file:
     path: /delete_file
     defaults: { _controller:AppBundle:Uploader:deleteFile }
+    options:
+        expose: true
+        
+        
+## Suivi parc
+
+
+suivi_parc:
+    path: /suivi_parc
+    defaults: { _controller:AppBundle:SuiviParc:index }
+    options:
+        expose: true
+        
+synthese_hebdo:
+    path: /synthese_hebdo
+    defaults: { _controller:AppBundle:SuiviParc:syntheseHebdo }
+    options:
+        expose: true
+        
+synthese_hebdo_for_annee:
+    path: /synthese_hebdo_par_annee
+    defaults: { _controller:AppBundle:SuiviParc:syntheseHebdoForAnnee }
+    options:
+        expose: true
+        
+activation_hebdo_par_client:
+    path: /activation_hebdo_par_client
+    defaults: { _controller:AppBundle:SuiviParc:activationHebdoParClient }
     options:
         expose: true

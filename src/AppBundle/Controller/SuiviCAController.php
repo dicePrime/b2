@@ -13,14 +13,11 @@ namespace AppBundle\Controller;
  *
  * @author BMHB8456
  */
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
-use AppBundle\Entity\ListingCA;
 use AppBundle\Modele\ListingCAModel;
-use AppBundle\Modele\B2BVendeurModele;
 use AppBundle\Commons\Tools;
 use Symfony\Component\HttpFoundation\JsonResponse;
 

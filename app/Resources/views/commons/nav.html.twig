@@ -53,7 +53,7 @@
                     <!-- /input-group -->
                 </li>
                 <li>
-                    <a href="{{ path("homepage") }}"><i class="fa fa-home fa-home"></i> Accueil</a>
+                    <a href="{{ path("homepage") }}"><i class="fa fa-home fa-home" style='color:black'></i> Accueil</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-line-chart fa-fw" style='color:black'></i> Suivi du Parc <span class="fa arrow"></span></a>
@@ -61,14 +61,14 @@
                         <li>
                             <a href="#">Suivi Hebdo <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level">
-                                <li>
-                                    <a href="#">Synthèse Hebdo</a>
+                                <li id='syntheseHebdo'>
+                                    <a href="{{ path('synthese_hebdo') }}">Synthèse Hebdo</a>
                                 </li>
                                 <li id="detailsHebdo">
                                     <a href="{{ path('details_hebdo') }}">Détails Hebdo</a>
                                 </li>
                                 <li>
-                                    <a href="#">Evolution Hebdo</a>
+                                    <a href="{{ path('activation_hebdo_par_client') }}" data-toggle="tooltip"  title="De votre choix">Activation Hebdo par client</a>
                                 </li>
                                 <li>
                                     <a href="#">Parc et activations</a>
@@ -130,7 +130,7 @@
                     <ul class="nav nav-second-level">
                     
                         <li>
-                            <a href="morris.html">Synthese CA</a>
+                            <a href="{{ path('synthese_ca') }}">Synthese CA</a>
                         </li>
                         <li id="listingCA">
                             <a href="{{ path("listing_ca") }}">Listing CA</a>
@@ -144,25 +144,19 @@
                 <li>
                     <a href="#"><i class="fa fa-exclamation-triangle fa-fw" style='color:black'></i> Requêtes <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
+                                         
                         <li>
-                            <a href="{{ path('listing_requetes') }}"><span class='badge'>0</span>&nbsp;Requêtes à mon niveau </a>
-                        </li>                        
-                        <li>
-                            <a href="{{ path('listing_requetes') }}"><span class='badge'>0</span>&nbsp;Toutes les requêtes</a>
+                            <a href="{{ path('listing_requetes') }}"><span class='glyphicon glyphicon-list' style='color:orange'></span>&nbsp;Listing des requêtes</a>
                         </li>
                         
                         <li>
-                            <a href="{{ path('saisie_requetes') }}"><span class='glyphicon glyphicon-plus-sign text-warning'></span> Saisie des requêtes</a>
+                            <a href="{{ path('saisie_requetes') }}"><span class='glyphicon glyphicon-plus' style='color:orange'></span>&nbsp;Nouvelle requête</a>
                         </li>
+                        
                         <li>
-                            <a href="#">Graphe des requêtes</a>
+                            <a href="#"><span class='glyphicon glyphicon-stats' style='color:orange'></span>&nbsp;Statistiques requêtes</a>
                         </li>
-                        <li>
-                            <a href="#">Statistiques requêtes</a>
-                        </li>
-                        <li>
-                            <a href="#">Synthèse par requêtes</a>
-                        </li>
+                       
                         
                     </ul>
                   <!-- /.nav-second-level -->

@@ -1,0 +1,167 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %} 
+    {{ parent() }}
+    <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/dropzone.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/uploadfile.css') }}"/>
+{% endblock %}
+
+{% block contenu %}
+    <div class="row" style="padding-top: 25px;">
+        <div class="col-xs-12">
+            <ol class="breadcrumb">
+                <li class="active">Synthese du CA</li>      
+            </ol>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-xs-1 pull-right'>
+            <button class='btn btn-success' id='btnExport'><span class='glyphicon glyphicon-export' style='font-size:1.5em'></span></button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-bordered table-condensed table-striped table-fixed-header" id='syntheseCA'>
+                <thead class='orangeElement whiteText header'>
+                    <tr>
+                        <th>Mois</th><th>REGION</th><th>TYPE DE COMPTE</th>
+                            {% for annee in annees %}
+                            <td>{{ annee }}</td>
+                        {% endfor %}
+                    </tr>
+                </thead>
+
+                <tbody style='height: 400px;overflow: auto'>
+                    {% for i in 1..12 %}
+                        <tr>                   
+                            <th rowspan="24">
+                                {% if i < 10 %}
+                                    {% set mois = ['0', i]|join %}
+                                {% else %}
+                                    {% set mois = ['', i]|join %}   
+                                {% endif %}
+                                {{ mois }}
+                            </th>
+                            <th rowspan='4'>
+                                GLOBAL
+                            </th>
+                            <th>TOTAL</th>
+                            {% for annee in annees %}
+                                <td>{% if synthese[annee][mois]['GLOBAL']['GLOBAL'] is defined %}
+                                    {{ synthese[annee][mois]['GLOBAL']['GLOBAL'] }}
+                                    {% endif %}
+                                </td>
+                            {% endfor %}
+                            </tr>
+                            <tr>
+                            <th>GC</th>
+                                {% for annee in annees %}
+                                <td>{% if synthese[annee][mois]['GLOBAL']['GC'] is defined %}
+                                    {{ synthese[annee][mois]['GLOBAL']['GC'] }}
+                                    {% endif %}
+                                </td>
+                            {% endfor %}
+                            </tr>
+                        </tr>
+                        <tr>
+                            <th>LL</th>
+                                {% for annee in annees %}
+                                <td>
+                                    {% if synthese[annee][mois]['GLOBAL']['LL'] is defined %}
+                                    {{ synthese[annee][mois]['GLOBAL']['LL'] }}
+                                    {% endif %}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <th>MOBILE</th>
+                                {% for annee in annees %}
+                                <td>
+                                    {% if synthese[annee][mois]['GLOBAL']['MOBILE'] is defined %}
+                                    {{ synthese[annee][mois]['GLOBAL']['MOBILE'] }}
+                                    {% endif %}
+                                </td>
+                            {% endfor %}
+                        </tr>
+
+                        {% for region in ['CENTRE','LITTORAL', 'NORD', 'NOSO', 'OUEST'] %}
+                            <tr>
+                                <th rowspan="4">
+                                    {{ region }}
+                                </th>
+                                <th>GLOBAL</th>{% for annee in annees %}
+                                <td>
+                                    {% if synthese[annee][mois][region]['GLOBAL'] is defined %}
+                                        {{ synthese[annee][mois][region]['GLOBAL'] }}
+                                    {% endif %}
+                                </td>
+                                {% endfor %}
+                            </tr>
+                            <tr>
+                                <th>GC</th>{% for annee in annees %}
+                                <td>
+                                    {% if synthese[annee][mois][region]['GC'] is defined %}
+                                        {{ synthese[annee][mois][region]['GC'] }}
+                                    {% endif %}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <th>LL</th>
+                                {% for annee in annees %}
+                                <td>
+                                    {% if synthese[annee][mois][region]['LL'] is defined %}
+                                        {{ synthese[annee][mois][region]['LL'] }}
+                                    {% endif %}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <th>MOBILE</th>
+                                {% for annee in annees %}
+                                <td>
+                                    {% if synthese[annee][mois][region]['MOBILE'] is defined %}
+                                        {{ synthese[annee][mois][region]['MOBILE'] }}
+                                    {% endif %}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        {% endblock %}
+            {% block scripts %}
+                {{ parent() }}
+                <script src="{{ asset('js/moment.js') }}"></script>
+                <script src="{{ asset('js/jquery.table2excel.js') }}"></script>
+                <script>
+                    $(document).ready(function () {
+                        $("#btnExport").click(function () {
+                            
+                            var nomFichier = prompt("Entrez un nom de fichier", "syntheseCA");
+                            
+                            if(nomFichier === null)
+                            {
+                                nomFichier = "syntheseCA";
+                            }
+                            
+                            $("#syntheseCA").table2excel({
+                                // exclude CSS class
+
+                                exclude: ".noExl",
+                                name: "Synthese CA",
+                                filename: nomFichier //do not include extension
+
+                            });
+
+                        });
+                    });
+                </script>
+            {% endblock %}
