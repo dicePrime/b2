@@ -16,9 +16,35 @@ namespace diceprime\Bundle\ORMBundle\Classes;
 class DBConfig {
 
     //put your code here
+    
+    
 
     public static $db = array(
+           
+        'VueCroissanceParc' => array(
+          'class' => '\AppBundle\Entity\VueCroissanceParc',
+          'table' => 'vw_croissance_parc',
+          'fields' => array('MOIS', 'TYPE1', 'PARC', 
+              'SUSPENSION', 'ACTIVATION', 'RESILIATION', 'NETADD', 'PARC_ACTIF'),
+          'fields_mapping' => array('MOIS' => 'mois', 'TYPE1' => 'type1',
+              'PARC' => 'parc', 'SUSPENSION' => 'suspension', 'ACTIVATION' => 'activation',
+              'RESILIATION' => 'resiliation', 'NETADD' => 'netAdd', 'PARC_ACTIF' => 'parcActif')
+        ),
         
+          'RecBTBActSyn' => array(
+          'class' => '\AppBundle\Entity\RecBTBActSynWeek',
+          'table' => 'b2b_parc_hebdo',
+          'fields' => array('NENREG', 'MOIS', 'CUSTCODE', 'INTITULE',
+              'DES', 'TYPE1', 'CSCURBALANCE', 'PREV_BALANCE', 'LBC_DATE',
+              'CB1', 'SUSP1', 'ACT1', 'DEAC1'),
+          'fields_mapping'=> array(
+              'NENREG' => 'nEnreg', 'MOIS' => 'mois', 'CUSTCODE' => 'custCode',
+              'INTITULE' => 'intitule', 'DES' => 'des', 'TYPE1' => 'type1',
+              'CSCURBALANCE' => 'csCurbalance', 'PREV_BALANCE' => 'prevBalance',
+              'LBC_DATE' => 'lbcDate', 'CB1' => 'cb1', 'SUSP1' => 'susp1',
+              'ACT1' => 'act1', 'DEAC1' => 'deac1'
+          )
+        ),
         
         'B2BParcHebdo' => array(
             

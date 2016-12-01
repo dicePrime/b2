@@ -1,8 +1,0 @@
-PDOStatement Object
-(
-    [queryString] => SELECT `SEM`, `CUSTCODE`, `INTITULE`, `DES`, `TYPE1`, `CB1`, `ACT1`, `SUSP1`
-			 FROM `rec_btb_act_syn_week`
-			 
-			 
-			 
-)

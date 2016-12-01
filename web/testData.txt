@@ -1,0 +1,140 @@
+Array
+(
+    [draw] => 50
+    [recordsTotal] => 581236
+    [recordsFiltered] => 10
+    [data] => Array
+        (
+            [0] => Array
+                (
+                    [ANNEE] => 2015
+                    [SEM] => 52
+                    [CUSTCODE] => 4.1122
+                    [INTITULE] => S.C.H.A.
+                    [DES] => Forfait Mix PLATINIUM
+                    [TYPE1] => MOBILE
+                    [CB1] => 1
+                    [ACT1] => 0
+                    [SUSP1] => 0
+                )
+
+            [1] => Array
+                (
+                    [ANNEE] => 2015
+                    [SEM] => 52
+                    [CUSTCODE] => 4.1123
+                    [INTITULE] => IBC
+                    [DES] => Orange intense 8
+                    [TYPE1] => MOBILE
+                    [CB1] => 1
+                    [ACT1] => 0
+                    [SUSP1] => 0
+                )
+
+            [2] => Array
+                (
+                    [ANNEE] => 2015
+                    [SEM] => 52
+                    [CUSTCODE] => 4.1124
+                    [INTITULE] => TOTAL CAMEROUN S.A.
+                    [DES] => Data Live
+                    [TYPE1] => MOBILE
+                    [CB1] => 24
+                    [ACT1] => 0
+                    [SUSP1] => 1
+                )
+
+            [3] => Array
+                (
+                    [ANNEE] => 2015
+                    [SEM] => 52
+                    [CUSTCODE] => 4.1124
+                    [INTITULE] => TOTAL CAMEROUN S.A.
+                    [DES] => orange mix total
+                    [TYPE1] => MOBILE
+                    [CB1] => 1
+                    [ACT1] => 0
+                    [SUSP1] => 0
+                )
+
+            [4] => Array
+                (
+                    [ANNEE] => 2015
+                    [SEM] => 52
+                    [CUSTCODE] => 4.1124
+                    [INTITULE] => TOTAL CAMEROUN S.A.
+                    [DES] => Business everywhere
+                    [TYPE1] => MOBILE
+                    [CB1] => 2
+                    [ACT1] => 0
+                    [SUSP1] => 0
+                )
+
+            [5] => Array
+                (
+                    [ANNEE] => 2015
+                    [SEM] => 52
+                    [CUSTCODE] => 4.1124
+                    [INTITULE] => TOTAL CAMEROUN S.A.
+                    [DES] => Orange business flex
+                    [TYPE1] => MOBILE
+                    [CB1] => 177
+                    [ACT1] => 3
+                    [SUSP1] => 2
+                )
+
+            [6] => Array
+                (
+                    [ANNEE] => 2015
+                    [SEM] => 52
+                    [CUSTCODE] => 4.1124
+                    [INTITULE] => TOTAL CAMEROUN S.A.
+                    [DES] => Orange business open
+                    [TYPE1] => MOBILE
+                    [CB1] => 18
+                    [ACT1] => 0
+                    [SUSP1] => 0
+                )
+
+            [7] => Array
+                (
+                    [ANNEE] => 2015
+                    [SEM] => 52
+                    [CUSTCODE] => 4.1124
+                    [INTITULE] => TOTAL CAMEROUN S.A.
+                    [DES] => Orange intense total
+                    [TYPE1] => MOBILE
+                    [CB1] => 20
+                    [ACT1] => 0
+                    [SUSP1] => 0
+                )
+
+            [8] => Array
+                (
+                    [ANNEE] => 2015
+                    [SEM] => 52
+                    [CUSTCODE] => 4.1124
+                    [INTITULE] => TOTAL CAMEROUN S.A.
+                    [DES] => Orange Grand Compte Move
+                    [TYPE1] => MOBILE
+                    [CB1] => 138
+                    [ACT1] => 0
+                    [SUSP1] => 0
+                )
+
+            [9] => Array
+                (
+                    [ANNEE] => 2015
+                    [SEM] => 52
+                    [CUSTCODE] => 4.1124
+                    [INTITULE] => TOTAL CAMEROUN S.A.
+                    [DES] => Orange Grand Compte Move Mix
+                    [TYPE1] => MOBILE
+                    [CB1] => 4
+                    [ACT1] => 0
+                    [SUSP1] => 0
+                )
+
+        )
+
+)

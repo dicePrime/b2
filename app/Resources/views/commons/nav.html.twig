@@ -15,9 +15,9 @@
     <!-- /.navbar-header -->
 
     <ul class="nav navbar-top-links navbar-right">
-        
+
         <!-- /.dropdown -->
-       
+
         <!-- /.dropdown -->
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -58,69 +58,44 @@
                 <li>
                     <a href="#"><i class="fa fa-line-chart fa-fw" style='color:black'></i> Suivi du Parc <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li>
-                            <a href="#">Suivi Hebdo <span class="fa arrow"></span></a>
-                            <ul class="nav nav-third-level">
-                                <li id='syntheseHebdo'>
-                                    <a href="{{ path('synthese_hebdo') }}">Synthèse Hebdo</a>
-                                </li>
-                                <li id="detailsHebdo">
-                                    <a href="{{ path('details_hebdo') }}">Détails Hebdo</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('activation_hebdo_par_client') }}" data-toggle="tooltip"  title="De votre choix">Activation Hebdo par client</a>
-                                </li>
-                                <li>
-                                    <a href="#">Parc et activations</a>
-                                </li>
-                                <li>
-                                    <a href="#">Parc par type</a>
-                                </li>                      
-                                <li>
-                                    <a href="#">Détails parc par type</a>
-                                </li>
-                            </ul>
+                        <li id='syntheseHebdo'>
+                            <a href="{{ path('synthese_hebdo') }}">Synthèse Hebdo</a>
+                        </li>
+                         <li id='syntheseMensuelle'>
+                            <a href="{{ path('synthese_mensuelle') }}">Synthèse Mensuelle</a>
+                        </li>
+                        <li id='evolutionHebdoParOffre'>
+                            <a href="#">Evolution hebdo par offre</a>
+                        </li>
+                        <li id='evolutionHebdoParOffre'>
+                            <a href="#">Evolution mensuelle par offre</a>
+                        </li>
+                        <li id='evolutionMensuelleParOffre'>
+                            <a href="#">Evolution hebdo par offre</a>
+                        </li>
+                        <li id='evolutionMensuelleParOffre'>
+                            <a href="#">Top Clients</a>
+                        </li>
+                        <li id="detailsHebdo">
+                            <a href="{{ path('details_hebdo') }}">Détails Hebdo</a>
                         </li>
                         <li>
-                               <a href="#">Suivi Mensuel <span class="fa arrow"></span></a>
-                    <ul class="nav nav-third-level">
-                        <li>
-                            <a href="#">Synthèses mensuelles</a>
+                            <a href="{{ path('activation_hebdo_par_client') }}" data-toggle="tooltip"  title="De votre choix">Activation Hebdo par client</a>
                         </li>
                         <li>
-                            <a href="#">Détails des lignes du parc</a>
+                            <a href="#"> Détails Activations </a>
                         </li>
                         <li>
-                            <a href="#">Analyse du parc</a>
+                            <a href="#">Parc et activations</a>
                         </li>
                         <li>
-                            <a href="#">Evolution mensuelle des activations</a>
-                        </li>
+                            <a href="#">Parc par type</a>
+                        </li>                      
                         <li>
-                            <a href="#">Croissance mensuelle du parc</a>
-                        </li>
-                        <li>
-                            <a href="#">Parc par formule</a>
-                        </li>
-                        <li>
-                            <a href="#">Répartition par formule</a>
-                        </li>
-                        <li>
-                            <a href="#">Détails du parc par formule</a>
-                        </li>
+                            <a href="#">Détails parc par type</a>
+                        </li>                      
                     </ul>
-                            
-                            <!-- /.nav-third-level -->
-                        </li>
-
-                    </ul>
-                    <!-- /.nav-second-level -->
-
-
-                
-                 
-                    <!-- /.nav-third-level -->
-                
+                   
                 </li>                
 
                 <!-- /.nav-second-level -->
@@ -128,7 +103,7 @@
                 <li>
                     <a href="#"><i class="fa fa-money fa-fw" style='color:black'></i> Suivi du CA<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                    
+
                         <li>
                             <a href="{{ path('synthese_ca') }}">Synthese CA</a>
                         </li>
@@ -144,28 +119,28 @@
                 <li>
                     <a href="#"><i class="fa fa-exclamation-triangle fa-fw" style='color:black'></i> Requêtes <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                                         
+
                         <li>
                             <a href="{{ path('listing_requetes') }}"><span class='glyphicon glyphicon-list' style='color:orange'></span>&nbsp;Listing des requêtes</a>
                         </li>
-                        
+
                         <li>
                             <a href="{{ path('saisie_requetes') }}"><span class='glyphicon glyphicon-plus' style='color:orange'></span>&nbsp;Nouvelle requête</a>
                         </li>
-                        
+
                         <li>
                             <a href="#"><span class='glyphicon glyphicon-stats' style='color:orange'></span>&nbsp;Statistiques requêtes</a>
                         </li>
-                       
-                        
+
+
                     </ul>
-                  <!-- /.nav-second-level -->
-                                 
+                    <!-- /.nav-second-level -->
+
                     <!-- /.nav-third-level -->
-                
+
                 </li>   
-               
-                
+
+
             </ul>
         </div>
         <!-- /.sidebar-collapse -->

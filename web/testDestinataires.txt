@@ -1,0 +1,21 @@
+Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [nature] => Cc
+        )
+
+    [1] => Array
+        (
+            [id] => 1
+            [nature] => Cc
+        )
+
+    [2] => Array
+        (
+            [id] => 3
+            [nature] => To
+        )
+
+)

@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block contenu %}
-    
+
     <div class="row" style="padding-top: 25px;">
         <div class="col-xs-12">
             <ol class="breadcrumb">
@@ -25,18 +25,17 @@
     <div class="row">
         <div class="col-xs-12">
 
-            <table class="table table-condensed display" cellspacing="0" width="100%" id='activationsHebdo'>
+            <table class="table table-condensed table-striped display" cellspacing="0" width="100%" id='activationsHebdo'>
                 <thead class='orangeElement whiteText'>
                     <tr>
                         <th>Année</th><th>Semaine</th><th>Compte</th>
                         <th>Intitulé</th><th>Formule</th><th>Type</th>
                         <th>Parc</th><th>Activation</th><th>Suspension</th>
-                        <th>Résiliation</th>                            
                     </tr>
                 </thead>
 
-                
-                    
+
+
             </table>
         </div>
     </div>
@@ -58,26 +57,46 @@
         $(document).ready(function () {
             $("#syntheseHebdo").addClass('active');
             $('#activationsHebdo').dataTable({
-                    
-                     serverSide: true,
-                     processing: true,
-                     ajax:{
-                        url: Routing.generate('activation_hebdo_par_client'),
-                        type: 'POST'
-                    },
-                    "columns":[
-                        {"data": "ANNEE" },
-                        {"data": "SEM"},
-                        {"data": "CUSTCODE"},
-                        {"data": "INTITULE"},
-                        {"data": "DES"},
-                        {"data": "TYPE1"},
-                        {"data": "CB1"},
-                        {"data": "ACT1"},
-                        {"data": "SUSP1"}
-                    ]
-                });
+                dom: 'Blfrtip',
+                buttons: [
+                    'excel'
+                ],
+                swfPath: '../swf/copy_csv_xls.swf',
+                serverSide: true,
+                //processing: true,
 
+                "bProcessing": true,
+                "bServerSide": true,
+                "sAjaxSource": Routing.generate('activation_hebdo_par_client'),
+                columns: [
+                    {data: "ANNEE"},
+                    {data: "SEM"},
+                    {data: "CUSTCODE"},
+                    {data: "INTITULE"},
+                    {data: "DES"},
+                    {data: "TYPE1"},
+                    {data: "CB1"},
+                    {data: "ACT1"},
+                    {data: "SUSP1"}
+                ]
+            });
+
+            $("#btnExport").click(function () {
+
+                var nomFichier = prompt("Entrez un nom de fichier", "syntheseCA");
+                if (nomFichier === null)
+                {
+                    nomFichier = "syntheseCA";
+                }
+
+                $("#activationsHebdo").table2excel({
+                    // exclude CSS class
+                    exclude: ".noExl",
+                    name: "Synthese CA",
+                    filename: nomFichier //do not include extension
+
+                });
+            });
         });
     </script>
 {% endblock %}

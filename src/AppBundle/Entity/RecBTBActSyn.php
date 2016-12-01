@@ -9,14 +9,16 @@
 namespace AppBundle\Entity;
 
 /**
- * Description of RecBTBActSynWeek
+ * Description of RecBTBActSyn
  *
  * @author BMHB8456
  */
-class RecBTBActSynWeek {
+class RecBTBActSyn {
     //put your code here
     
-    private $sem;    
+    private $nEnreg;
+    
+    private $mois;
     
     private $custCode;
     
@@ -26,7 +28,7 @@ class RecBTBActSynWeek {
     
     private $type1;
     
-    private $cscurbalance;
+    private $csCurbalance;
     
     private $prevBalance;
     
@@ -40,14 +42,30 @@ class RecBTBActSynWeek {
     
     private $deac1;
     
-    private $annee;
     
-    private $grandCompte;
+    public function setData($array)
+    {
+        $this->setNEnreg($array['NENREG']);
+        $this->setMois($array['MOIS']);
+        $this->setCustCode($array['CUSTCODE']);
+        $this->setIntitule($array['INTITULE']);
+        $this->setDes($array['DES']);
+        $this->setType1($array['TYPE1']);
+        $this->setCsCurbalance($array['CSCURBALANCE']);
+        $this->setPrevBalance($array['PREV_BALANCE']);
+        $this->setLbcDate($array['LBC_DATE']);
+        $this->setCB1($array['CB1']);
+        $this->setSusp1($array['SUSP1']);
+        $this->setAct1($array['ACT1']);
+        $this->setDEAC1($array['DEAC1']);
+    }
     
-    
-    
-    function getSem() {
-        return $this->sem;
+    function getNEnreg() {
+        return $this->nEnreg;
+    }
+
+    function getMois() {
+        return $this->mois;
     }
 
     function getCustCode() {
@@ -66,8 +84,8 @@ class RecBTBActSynWeek {
         return $this->type1;
     }
 
-    function getCscurbalance() {
-        return $this->cscurbalance;
+    function getCsCurbalance() {
+        return $this->csCurbalance;
     }
 
     function getPrevBalance() {
@@ -94,16 +112,12 @@ class RecBTBActSynWeek {
         return $this->deac1;
     }
 
-    function getAnnee() {
-        return $this->annee;
+    function setNEnreg($nEnreg) {
+        $this->nEnreg = $nEnreg;
     }
 
-    function getGrandCompte() {
-        return $this->grandCompte;
-    }
-
-    function setSem($sem) {
-        $this->sem = $sem;
+    function setMois($mois) {
+        $this->mois = $mois;
     }
 
     function setCustCode($custCode) {
@@ -122,8 +136,8 @@ class RecBTBActSynWeek {
         $this->type1 = $type1;
     }
 
-    function setCscurbalance($cscurbalance) {
-        $this->cscurbalance = $cscurbalance;
+    function setCsCurbalance($csCurbalance) {
+        $this->csCurbalance = $csCurbalance;
     }
 
     function setPrevBalance($prevBalance) {
@@ -148,33 +162,6 @@ class RecBTBActSynWeek {
 
     function setDeac1($deac1) {
         $this->deac1 = $deac1;
-    }
-
-    function setAnnee($annee) {
-        $this->annee = $annee;
-    }
-
-    function setGrandCompte($grandCompte) {
-        $this->grandCompte = $grandCompte;
-    }
-
-    public function setData($array)
-    {
-       $this->setSem($array['SEM']);
-       $this->setCustCode($array['CUSTCODE']);
-       $this->setIntitule($array['INTITULE']);
-       $this->setDes($array['DES']);
-       $this->setType1($array['TYPE1']);
-       $this->setCscurbalance($array['CSCURBALANCE']);
-       $this->setPrevBalance($array['PREV_BALANCE']);
-       $this->setLbcDate($array['LBC_DATE']);
-       $this->setCb1($array['CB1']);
-       $this->setSusp1($array['SUSP1']);
-       $this->setAct1($array['ACT1']);
-       $this->setDeac1($array['DEAC1']);
-       $this->setAnnee($array['ANNEE']);
-       $this->setGrandCompte($array['GRANDCOMPTE']);
-    }
-    
+    }          
     
 }

@@ -41,6 +41,9 @@ class ListingCAModel {
     
     public static $_GET_REC_BTB_CA_BY_DEBUT_AND_FIN_ORDER_BY_COMMERCIAL_DESC = "select * from rec_btb_ca where periode >= :debut and periode <= :fin order by commercial desc LIMIT :begin, :size";
         
+    public static $_MIN_PERIODE = "201412";
+    
+    public static $_MAX_PERIODE = "202012";
     
     private $connection;
 
@@ -106,6 +109,25 @@ class ListingCAModel {
             Tools::writeFile("exceptions/findByDebutAndFin.txt", $ex->getMessage()."\n\n".$ex->getTraceAsString());
             return array();
         }  
+    }
+    
+    public function jTableFind($debutPeriode, $finPeriode, $begin, $end, $sorting, $searchArray)
+    {
+        $conditions = array();
+        
+        $debut = $debutPeriode != null ? $debutPeriode : ListingCAModel::$_MIN_PERIODE;
+        $fin = $finPeriode != null ? $finPeriode: ListingCAModel::$_MAX_PERIODE;
+        
+        $conditions = array(
+            array('champ'=>'periode', 'condition'=> '>=', 'valeur' => $debut),
+            array('champ'=>'periode', 'condition'=> '<=', 'valeur'=> $fin));
+        
+        $sWhere = " periode >= "
+        
+        $orderBy = $sorting;
+        
+       
+        
     }
 
     public function findByDebutAndFinAndLimitedAndSorted($debut, $fin, $begin, $end,$sorting) {

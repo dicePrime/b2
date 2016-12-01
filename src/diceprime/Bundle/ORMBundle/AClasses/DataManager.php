@@ -10,6 +10,8 @@ namespace diceprime\Bundle\ORMBundle\AClasses;
 
 use diceprime\Bundle\ORMBundle\Classes\DBConfig;
 
+use AppBundle\Commons\Tools;
+
 /**
  * Description of AbstractEntity
  *
@@ -68,31 +70,23 @@ class DataManager {
         
         return $result['COUNT(*)'];
     }
+    
+    
 
-    public function select($where = "", $order = "", $limit = null, $offset = null) {
-        $query = 'SELECT ' . implode(",", DBConfig::$db[$this->entityName]['fields']) . ' FROM ' . DBConfig::$db[$this->entityName]['table']
+    public function jTableFinder($where = null, $order = null, $limit = null, $offset = null) {
+        $query = "SELECT " . implode(",", DBConfig::$db[$this->entityName]['fields']) . ' FROM ' . DBConfig::$db[$this->entityName]['table']
                 . (($where) ? ' WHERE' . $where : "")
-                . (($limit) ? ' LIMIT' . $limit : "")
-                . (($offset && $limit) ? ' OFFSET' . $offset : "")
-                . (($order) ? ' ORDER BY' . $order : "");
+                . (($limit) ? ' LIMIT ' . $limit : "")
+                . (($offset && $limit) ? ' OFFSET ' . $offset : "")
+                . (($order) ? $order : "");
         
         
-        
-        $stm = $this->connection->prepare($query);
-        
-        try
-        {
+     
+        $stm = $this->connection->prepare($query);      
         $stm->execute();
-        }
-        catch(\Exception $ex)
-        {
-            $fichier = fopen('testSelect.txt', 'w+');
-            fputs($fichier, print_r($ex->getMessage()));
-            fclose($fichier);
-        }
-         
-        
         $results = $stm->fetchAll();
+        
+        Tools::writeFile("testSelect.txt", $query);
          
         $output = array();
         $taille = count($results);
@@ -163,17 +157,18 @@ class DataManager {
 
       
     public function findAll($indexedBy = "") {
-        $sql = "SELECT " . implode(",", DBConfig::$db[$this->entityName]['fields'])
+        $sql = "SELECT " . implode(", ", DBConfig::$db[$this->entityName]['fields'])
                 . " FROM " . DBConfig::$db[$this->entityName]['table'];
         $stm = $this->connection->prepare($sql);
-        
+        //Tools::writeFile("tetQuery.txt", $this->connection);
         $stm->execute();
         
         $results = $stm->fetchAll();
         
+        Tools::writeFile("tetFindAll.txt", $results);
         
         
-        //print_r($results);
+       
         $output = array();
         if (count($results) > 0) {
             if ($indexedBy !== "") {

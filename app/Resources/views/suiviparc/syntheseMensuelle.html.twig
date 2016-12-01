@@ -1,0 +1,342 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %} 
+    <link href="{{ asset('css/jquery.dataTables.css') }}" rel="stylesheet" type="text/css" />
+    {{ parent() }}
+    <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/buttons.dataTables.min.css') }}" />
+{% endblock %}
+
+{% block contenu %}
+    {{ include('::suiviparc/statsModal.html.twig') }}
+    <div class="row" style="padding-top: 25px;">
+        <div class="col-xs-12">
+            <ol class="breadcrumb">
+                <li class="active">Synthèse mensuelle du parc</li>      
+            </ol>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-xs-1 pull-right'>
+            <button class='btn btn-success' id='btnExport'><span class='glyphicon glyphicon-export' style='font-size:1.5em'></span></button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+
+            <table class="table table-scroll table-condensed " id='syntheseCA'>
+                <thead class='orangeElement whiteText'>
+                    <tr>
+                        <th>Année</th><th>Mois</th><th>Type</th><th>Parc</th><th>Parc Actif</th><th>Activation</th>
+                        <th>Résiliation</th><th>NetAdd</th>                            
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for annee in annees  %}
+
+                        {% for semaine in mois[annee] %}
+                            {% for type in types %}
+                                <tr>
+                                    <td>{{ annee }}</td><td>{{ semaine }}</td>
+                                    <td>{{ type }}</td>
+                                    <td>
+                                        {% if synthese[annee][semaine][type]['PARC'] != null %}
+                                            {{ synthese[annee][semaine][type]['PARC'] }}
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if synthese[annee][semaine][type]['PARC_ACTIF'] != null %}
+                                            {{ synthese[annee][semaine][type]['PARC_ACTIF'] }}
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if synthese[annee][semaine][type]['ACTIVATION'] != null %}
+                                            {{ synthese[annee][semaine][type]['ACTIVATION'] }}
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if synthese[annee][semaine][type]['RESILIATION'] != null %}
+                                            {{ synthese[annee][semaine][type]['RESILIATION'] }}
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if synthese[annee][semaine][type]['NETADD'] != null %}
+                                            {{ synthese[annee][semaine][type]['NETADD'] }}
+                                        {% endif %}
+                                    </td>
+                                </tr>
+
+                            {% endfor %}
+                            <tr>
+                                <td>{{ annee }}</td><td>{{ semaine }}</td><th>TOTAL</th>
+                                <td>
+                                        {% if synthese[annee][semaine]['TOTAL']['PARC'] != null %}
+                                            {{ synthese[annee][semaine]['TOTAL']['PARC'] }}
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if synthese[annee][semaine]['TOTAL']['ACTIVATION'] != null %}
+                                            {{ synthese[annee][semaine]['TOTAL']['ACTIVATION'] }}
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if synthese[annee][semaine]['TOTAL']['RESILIATION'] != null %}
+                                            {{ synthese[annee][semaine]['TOTAL']['RESILIATION'] }}
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if synthese[annee][semaine]['TOTAL']['NETADD'] != null %}
+                                            {{ synthese[annee][semaine]['TOTAL']['NETADD'] }}
+                                        {% endif %}
+                                    </td>
+                            </tr>
+                        {% endfor %}
+                        {% for type in types %}
+                            <tr class='orangeElement whiteText'>
+                                <th>{{ annee }}</th><th>TOTAL {{ type }}</th>
+                                <th>{{ type }}</th>
+                                <td>
+                                    {% if synthese[annee]['TOTAL'][type]['PARC'] != null %}
+                                        {{ synthese[annee]['TOTAL'][type]['PARC'] }}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if synthese[annee]['TOTAL'][type]['ACTIVATION'] != null %}
+                                        {{ synthese[annee]['TOTAL'][type]['ACTIVATION'] }}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if synthese[annee]['TOTAL'][type]['RESILIATION'] != null %}
+                                        {{ synthese[annee]['TOTAL'][type]['RESILIATION'] }}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if synthese[annee]['TOTAL'][type]['NETADD'] != null %}
+                                        {{ synthese[annee]['TOTAL'][type]['NETADD'] }}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        <tr class='orangeElement whiteText'>
+                            <th>{{ annee }} 
+                                <a class="btn btn-default showChart" annee="{{ annee }}"
+                                   data-toggle="modal" data-target="#statModal">
+                                    <span class="glyphicon glyphicon-stats"></span>
+                                </a></th><th>TOTAL</th>
+                            <th>TOTAL</th>
+                            <td>
+                                {% if synthese[annee]['TOTAL']['PARC'] != null %}
+                                    {{ synthese[annee]['TOTAL']['PARC'] }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if synthese[annee]['TOTAL']['ACTIVATION'] != null %}
+                                    {{ synthese[annee]['TOTAL']['ACTIVATION'] }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if synthese[annee]['TOTAL']['RESILIATION'] != null %}
+                                    {{ synthese[annee]['TOTAL']['RESILIATION'] }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if synthese[annee]['TOTAL']['NETADD'] != null %}
+                                    {{ synthese[annee]['TOTAL']['NETADD'] }}
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <input type="hidden" value="" id="currentYearStat"/>
+
+{% endblock %}
+{% block scripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/moment.js') }}"></script>
+    <script src="{{ asset('js/jquery.table2excel.js') }}"></script>
+    <script src="{{ asset('js/highcharts.js') }}"></script>
+    <script src="{{ asset('js/exporting.js') }}"></script>
+    <script src="{{ asset('js/jquery.dataTables.js') }}" type="text/javascript"></script> 
+    <script src="{{ asset('js/dataTables.tableTools.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/dataTables.buttons.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/buttons.flash.min.js') }}" type="text/javascript"></script> 
+    <script>
+        $(document).ready(function () {
+            $("#syntheseHebdo").addClass('active');
+            $(".showChart").on('click', function () {
+                $("#currentYearStat").val($(this).attr('annee'));
+            });
+            //statModal
+            $('#statModal').on('shown.bs.modal', function () {
+                requestData();
+
+            });
+
+            $("#myModal").on("hidden.bs.modal", function () {
+                $(".loadingData").toggle();
+            });
+            function requestData()
+            {
+                var annee = $("#currentYearStat").val();
+                $.ajax({
+                    url: Routing.generate("synthese_hebdo_for_annee"),
+                    data: {'annee': annee},
+                    success: function (data) {
+                        var parsedData = JSON.parse(data);
+                        console.log(parsedData);
+                        var totalId = "TOTAL" + annee;
+
+
+                        var mobileId = "MOBILE" + annee;
+                        var internetId = "INTERNET" + annee;
+                        var globalChart = new Highcharts.Chart(
+                                {
+                                    chart: {
+                                        renderTo: 'totalChart',
+                                        type: 'line'
+                                    },
+                                    title: {
+                                        text: parsedData[totalId].title.title.text
+                                    },
+                                    xAxis: {
+                                        categories: parsedData[totalId].xAxis.xAxis.categories
+                                    },
+                                    yAxis: {
+                                        title: {
+                                            text: parsedData[totalId].yAxis.yAxis.title.text
+                                        }
+                                    },
+                                    series: [
+                                        {
+                                            name: parsedData[totalId].series[0][0].name,
+                                            data: parsedData[totalId].series[0][0].data
+                                        },
+                                        {name: parsedData[totalId].series[0][1].name,
+                                            data: parsedData[totalId].series[0][1].data},
+                                        {name: parsedData[totalId].series[0][2].name,
+                                            data: parsedData[totalId].series[0][2].data},
+                                        {name: parsedData[totalId].series[0][3].name,
+                                            data: parsedData[totalId].series[0][3].data}
+                                    ]
+
+                                });
+
+                        var mobileChart = new Highcharts.Chart(
+                                {
+                                    chart: {
+                                        renderTo: 'mobileChart',
+                                        type: 'line'
+                                    },
+                                    title: {
+                                        text: parsedData[mobileId].title.title.text
+                                    },
+                                    xAxis: {
+                                        categories: parsedData[mobileId].xAxis.xAxis.categories
+                                    },
+                                    yAxis: {
+                                        title: {
+                                            text: parsedData[mobileId].yAxis.yAxis.title.text
+                                        }
+                                    },
+                                    series: [
+                                        {
+                                            name: parsedData[mobileId].series[0][0].name,
+                                            data: stringArrayToNumberArray(parsedData[mobileId].series[0][0].data)
+                                        },
+                                        {name: parsedData[mobileId].series[0][1].name,
+                                            data: stringArrayToNumberArray(parsedData[mobileId].series[0][1].data)},
+                                        {name: parsedData[mobileId].series[0][2].name,
+                                            data: stringArrayToNumberArray(parsedData[mobileId].series[0][2].data)},
+                                        {name: parsedData[mobileId].series[0][3].name,
+                                            data: stringArrayToNumberArray(parsedData[mobileId].series[0][3].data)}
+                                    ]
+
+                                });
+
+                        var internetChart = new Highcharts.Chart(
+                                {
+                                    chart: {
+                                        renderTo: 'internetChart',
+                                        type: 'line'
+                                    },
+                                    title: {
+                                        text: parsedData[internetId].title.title.text
+                                    },
+                                    xAxis: {
+                                        categories: parsedData[internetId].xAxis.xAxis.categories
+                                    },
+                                    yAxis: {
+                                        title: {
+                                            text: parsedData[internetId].yAxis.yAxis.title.text
+                                        }
+                                    },
+                                    series: [
+                                        {
+                                            name: parsedData[internetId].series[0][0].name,
+                                            data: stringArrayToNumberArray(parsedData[internetId].series[0][0].data)
+                                        },
+                                        {name: parsedData[internetId].series[0][1].name,
+                                            data: stringArrayToNumberArray(parsedData[internetId].series[0][1].data)},
+                                        {name: parsedData[internetId].series[0][2].name,
+                                            data: stringArrayToNumberArray(parsedData[internetId].series[0][2].data)},
+                                        {name: parsedData[internetId].series[0][3].name,
+                                            data: stringArrayToNumberArray(parsedData[internetId].series[0][3].data)}
+                                    ]
+
+                                });
+                        $(".loadingData").toggle();
+
+                    }
+                });
+            }
+
+            function stringArrayToNumberArray(stringArray)
+            {
+                var taille = stringArray.length;
+                var result = new Array;
+
+                for (i = 0; i < taille; i++)
+                {
+                    result.push(parseFloat(stringArray[i]));
+                }
+
+                return result;
+
+            }
+
+            $("#btnExport").click(function () {
+
+                var nomFichier = prompt("Entrez un nom de fichier", "syntheseCA");
+                if (nomFichier === null)
+                {
+                    nomFichier = "syntheseCA";
+                }
+
+                $("#syntheseCA").table2excel({
+                    // exclude CSS class
+
+                    exclude: ".noExl",
+                    name: "Synthese CA",
+                    filename: nomFichier //do not include extension
+
+                });
+            });
+            $('.toDataTable').dataTable({
+                    dom: 'Blfrtip',
+                    buttons: [
+                        'excel'
+                    ],
+                    swfPath: '../swf/copy_csv_xls.swf',
+                    mColumns: 'visible'
+                });
+
+        });
+    </script>
+{% endblock %}

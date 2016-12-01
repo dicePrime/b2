@@ -119,6 +119,18 @@ synthese_hebdo:
     options:
         expose: true
         
+synthese_mensuelle:
+    path: /synthese_mensuelle
+    defaults: { _controller:AppBundle:SuiviParc:syntheseMensuelle }
+    options:
+        expose: true
+        
+syntese_mensuelle_for_annee:
+    path: /synthese_mensuelle_par_annee
+    defaults: { _controller:AppBundle:SuiviParc:syntheseMensuelleForAnnee }
+    options:
+        expose: true
+        
 synthese_hebdo_for_annee:
     path: /synthese_hebdo_par_annee
     defaults: { _controller:AppBundle:SuiviParc:syntheseHebdoForAnnee }

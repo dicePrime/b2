@@ -22,6 +22,7 @@ use AppBundle\Modele\B2BParcHebdoModele;
 use Ob\HighchartsBundle\Highcharts\Highchart;
 use AppBundle\Modele\SSP;
 use diceprime\Bundle\ORMBundle\AClasses\DataManager;
+use AppBundle\Modele\B2BParcMensuelModele;
 
 class SuiviParcController extends Controller {
 
@@ -32,6 +33,10 @@ class SuiviParcController extends Controller {
                     'base_dir' => realpath($this->container->getParameter('kernel.root_dir') . '/..')));
     }
 
+    /**
+     * 
+     * @return JsonResponse
+     */
     public function syntheseHebdoForAnneeAction() {
         $request = $this->getRequest();
         $annee = $request->get('annee');
@@ -45,10 +50,6 @@ class SuiviParcController extends Controller {
         //print_r($synthese['semaines']);
 
         $chartsTable = array();
-
-
-
-
         $semaines = $syntheses['semaines'][$annee];
         $tmpChart = new Highchart();
         $tmpChart->title->text("Evolution globale hebdomadaire du parc");
@@ -153,71 +154,110 @@ class SuiviParcController extends Controller {
                     'semaines' => $syntheses['semaines']));
     }
 
-    public function activationHebdoParClientAction() {
-        
-        $request = $this->getRequest();
-        
-        if($request->isXmlHttpRequest())
-        {
-        
-        $draw =  $request->get("draw");
-        $orderByColumnIndexTable = $request->get('order');
-        
-        $orderByColumnIndex = $orderByColumnIndexTable[0]['column'];
-        
-        $columns = $request->get('columns');
-        $orderBy = $columns[$orderByColumnIndex]['data'];
-        $orderTypeTable = $request->get('order');
-        $orderType = $orderTypeTable[0]['dir'];
-        
-        $start = $request->get('start');
-        $length = $request->get('length');
-        
-        
+    public function syntheseMensuelleAction() {
         $connection = $this->get("database_connection");
-        
-        $dataManager = new DataManager("RecBTBActSynWeek", $connection);
-        
-        
-        
-        $resultat = $dataManager->findAll();
-        
-        
-        $allElementCount = $dataManager->countAll();
-        
-        $data = array();
-        
-        foreach($resultat as $res)
-        {
-            $tmp = array();
-            $tmp['SEM'] = $res->getSem();
-            $tmp['CUSTCODE'] = $res->getCustCode();
-            $tmp['INTITULE'] = $res->getIntitule();
-            $tmp['DES'] = $res->getDes();
-            $tmp['TYPE1'] = $res->getType1();
-            $tmp['CB1'] = $res->getCB1();
-            $tmp['ACT1'] = $res->getAct1();
-            $tmp['SUSP1'] = $res->getSusp1();
-            
-            $data[] = $tmp;
-        }
-        
-        $result = array(
-                "draw" => intval($draw),
-                "recordsTotal" => $allElementCount,
-                "recordsFiltered" => count($resultat),
-                "data" => $data);
-        $response = new JsonResponse(json_encode($result));
-        
-        return $response;
-        }
-        else
-        {
-          return $this->render('suiviparc/synthes.html.twig', array(
+        $b2bParcHebdoModel = new B2BParcMensuelModele($connection);
+
+        $syntheses = $b2bParcHebdoModel->syntheseMensuelle();
+
+
+        return $this->render('suiviparc/syntheseMensuelle.html.twig', array(
                     'base_dir' => realpath($this->container->getParameter('kernel.root_dir') . '/..'),
-                    ));  
+                    'synthese' => $syntheses['synthese'],
+                    'annees' => $syntheses['annees'],
+                    'types' => $syntheses['types'],
+                    'mois' => $syntheses['mois']));
+    }
+
+    public function activationHebdoParClientAction() {
+
+        $request = $this->getRequest();
+
+        if ($request->isXmlHttpRequest()) {
+            try {
+
+
+                $start = $request->get('iDisplayStart');
+                $length = $request->get('iDisplayLength');
+                $sSearch = $request->get('sSearch');
+                $sEcho = $request->get('sEcho');
+
+                Tools::writeFile("testStartAndLength.txt", "start =" . $start . "-length =" . $length);
+
+                $connection = $this->get("database_connection");
+
+                $dataManager = new DataManager("RecBTBActSynWeek", $connection);
+
+
+                if ($start == null) {
+                    $start = $start + 1;
+                }
+                if ($length == null) {
+                    $length = 10;
+                }
+
+                $cols = array('ANNEE', 'SEM', 'CUSTCODE', 'INTITULE', 'DES', 'TYPE1', 'CB1',
+                    'ACT1', 'SUSP1');
+
+                $searchQuery = "";
+                if ($sSearch != null) {
+                    $sSearchArray = preg_split("# #", $sSearch);
+
+
+
+                    foreach ($sSearchArray as $next) {
+                        foreach ($cols as $col) {
+                            if ($searchQuery != "") {
+                                $searchQuery = $searchQuery . " OR (" . $col . " LIKE '%" . $next . "%') ";
+                            } else {
+                                $searchQuery = " (" . $col . " LIKE '%" . $next . "%') ";
+                            }
+                        }
+                    }
+                }
+
+                $resultat = $dataManager->jTableFinder($searchQuery, null, $length, $start);
+
+
+
+                $allElementCount = $dataManager->countAll();
+
+                $data = array();
+
+                foreach ($resultat as $res) {
+                    $tmp = array();
+                    $tmp['ANNEE'] = $res->getAnnee();
+                    $tmp['SEM'] = $res->getSem();
+                    $tmp['CUSTCODE'] = $res->getCustCode();
+                    $tmp['INTITULE'] = $res->getIntitule();
+                    $tmp['DES'] = $res->getDes();
+                    $tmp['TYPE1'] = $res->getType1();
+                    $tmp['CB1'] = $res->getCB1();
+                    $tmp['ACT1'] = $res->getAct1();
+                    $tmp['SUSP1'] = $res->getSusp1();
+
+                    $data[] = $tmp;
+                }
+
+
+                $result = array(
+                    "sEcho" => intval($sEcho),
+                    "iTotalRecords" => $allElementCount,
+                    "iTotalDisplayRecords" => $allElementCount,
+                    "aaData" => $data);
+
+
+                $response = new JsonResponse($result);
+
+                return $response;
+            } catch (\Excepiton $ex) {
+                Tools::writeFile("testExceptionActivationHebdo.txt", $ex->getMessage());
+            }
+        } else {
+            return $this->render('suiviparc/activationsHebdoParClient.html.twig', array(
+                        'base_dir' => realpath($this->container->getParameter('kernel.root_dir') . '/..'),
+            ));
         }
-        
     }
 
 }

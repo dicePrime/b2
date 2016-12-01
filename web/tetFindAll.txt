@@ -1,0 +1,195 @@
+Array
+(
+    [0] => Array
+        (
+            [MOIS] => 201501
+            [TYPE1] => MOBILE
+            [PARC] => 131183
+            [SUSPENSION] => 15924
+            [ACTIVATION] => 3118
+            [RESILIATION] => 1130
+            [NETADD] => 1988
+            [PARC_ACTIF] => 115259
+        )
+
+    [1] => Array
+        (
+            [MOIS] => 201502
+            [TYPE1] => MOBILE
+            [PARC] => 133392
+            [SUSPENSION] => 16140
+            [ACTIVATION] => 3365
+            [RESILIATION] => 965
+            [NETADD] => 2400
+            [PARC_ACTIF] => 117252
+        )
+
+    [2] => Array
+        (
+            [MOIS] => 201503
+            [TYPE1] => MOBILE
+            [PARC] => 135717
+            [SUSPENSION] => 16536
+            [ACTIVATION] => 2860
+            [RESILIATION] => 986
+            [NETADD] => 1874
+            [PARC_ACTIF] => 119181
+        )
+
+    [3] => Array
+        (
+            [MOIS] => 201504
+            [TYPE1] => MOBILE
+            [PARC] => 136938
+            [SUSPENSION] => 16766
+            [ACTIVATION] => 3401
+            [RESILIATION] => 1635
+            [NETADD] => 1766
+            [PARC_ACTIF] => 120172
+        )
+
+    [4] => Array
+        (
+            [MOIS] => 201505
+            [TYPE1] => MOBILE
+            [PARC] => 139446
+            [SUSPENSION] => 16944
+            [ACTIVATION] => 2893
+            [RESILIATION] => 902
+            [NETADD] => 1991
+            [PARC_ACTIF] => 122502
+        )
+
+    [5] => Array
+        (
+            [MOIS] => 201506
+            [TYPE1] => MOBILE
+            [PARC] => 136660
+            [SUSPENSION] => 17055
+            [ACTIVATION] => 2829
+            [RESILIATION] => 5669
+            [NETADD] => -2840
+            [PARC_ACTIF] => 119605
+        )
+
+    [6] => Array
+        (
+            [MOIS] => 201507
+            [TYPE1] => MOBILE
+            [PARC] => 135868
+            [SUSPENSION] => 17127
+            [ACTIVATION] => 3371
+            [RESILIATION] => 3678
+            [NETADD] => -307
+            [PARC_ACTIF] => 118741
+        )
+
+    [7] => Array
+        (
+            [MOIS] => 201508
+            [TYPE1] => MOBILE
+            [PARC] => 137633
+            [SUSPENSION] => 17228
+            [ACTIVATION] => 2926
+            [RESILIATION] => 1565
+            [NETADD] => 1361
+            [PARC_ACTIF] => 120405
+        )
+
+    [8] => Array
+        (
+            [MOIS] => 201509
+            [TYPE1] => MOBILE
+            [PARC] => 139286
+            [SUSPENSION] => 17453
+            [ACTIVATION] => 3587
+            [RESILIATION] => 1315
+            [NETADD] => 2272
+            [PARC_ACTIF] => 121833
+        )
+
+    [9] => Array
+        (
+            [MOIS] => 201510
+            [TYPE1] => MOBILE
+            [PARC] => 141629
+            [SUSPENSION] => 17528
+            [ACTIVATION] => 3313
+            [RESILIATION] => 1277
+            [NETADD] => 2036
+            [PARC_ACTIF] => 124101
+        )
+
+    [10] => Array
+        (
+            [MOIS] => 201601
+            [TYPE1] => MOBILE
+            [PARC] => 126747
+            [SUSPENSION] => 11539
+            [ACTIVATION] => 2812
+            [RESILIATION] => 1163
+            [NETADD] => 1649
+            [PARC_ACTIF] => 115208
+        )
+
+    [11] => Array
+        (
+            [MOIS] => 201602
+            [TYPE1] => MOBILE
+            [PARC] => 128528
+            [SUSPENSION] => 11713
+            [ACTIVATION] => 2539
+            [RESILIATION] => 1013
+            [NETADD] => 1526
+            [PARC_ACTIF] => 116815
+        )
+
+    [12] => Array
+        (
+            [MOIS] => 201603
+            [TYPE1] => MOBILE
+            [PARC] => 129506
+            [SUSPENSION] => 11851
+            [ACTIVATION] => 2683
+            [RESILIATION] => 1599
+            [NETADD] => 1084
+            [PARC_ACTIF] => 117655
+        )
+
+    [13] => Array
+        (
+            [MOIS] => 201604
+            [TYPE1] => MOBILE
+            [PARC] => 128955
+            [SUSPENSION] => 11927
+            [ACTIVATION] => 1895
+            [RESILIATION] => 3236
+            [NETADD] => -1341
+            [PARC_ACTIF] => 117028
+        )
+
+    [14] => Array
+        (
+            [MOIS] => 201605
+            [TYPE1] => MOBILE
+            [PARC] => 129287
+            [SUSPENSION] => 12008
+            [ACTIVATION] => 1651
+            [RESILIATION] => 1593
+            [NETADD] => 58
+            [PARC_ACTIF] => 117279
+        )
+
+    [15] => Array
+        (
+            [MOIS] => 201606
+            [TYPE1] => MOBILE
+            [PARC] => 129732
+            [SUSPENSION] => 12090
+            [ACTIVATION] => 2673
+            [RESILIATION] => 1153
+            [NETADD] => 1520
+            [PARC_ACTIF] => 117642
+        )
+
+)

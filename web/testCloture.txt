@@ -1,0 +1,45 @@
+AppBundle\Entity\B2BRequete Object
+(
+    [nRequete:AppBundle\Entity\B2BRequete:private] => 13762
+    [nClient:AppBundle\Entity\B2BRequete:private] => 
+    [nAscom:AppBundle\Entity\B2BRequete:private] => 
+    [numeroTicket:AppBundle\Entity\B2BRequete:private] => 
+    [dateReception:AppBundle\Entity\B2BRequete:private] => 2016-12-01 00:00:00
+    [dateTransmission:AppBundle\Entity\B2BRequete:private] => 
+    [dateCreation:AppBundle\Entity\B2BRequete:private] => 2016-12-01 12:20:16
+    [dateCloture:AppBundle\Entity\B2BRequete:private] => 2016-12-01 12:28:05
+    [destinataireDSC:AppBundle\Entity\B2BRequete:private] => 
+    [responsableDSC:AppBundle\Entity\B2BRequete:private] => 
+    [dateTraitementDSC:AppBundle\Entity\B2BRequete:private] => 
+    [ligne:AppBundle\Entity\B2BRequete:private] => test
+    [plageNumero:AppBundle\Entity\B2BRequete:private] => 
+    [nomClient:AppBundle\Entity\B2BRequete:private] => TEST
+    [justificatif:AppBundle\Entity\B2BRequete:private] => 
+    [remarquesInitiales:AppBundle\Entity\B2BRequete:private] => test
+    [remarquesTraitement:AppBundle\Entity\B2BRequete:private] => 
+    [nUserInit:AppBundle\Entity\B2BRequete:private] => 1
+    [nUserCloture:AppBundle\Entity\B2BRequete:private] => 
+    [compteClient:AppBundle\Entity\B2BRequete:private] => test
+    [source:AppBundle\Entity\B2BRequete:private] => 
+    [operation:AppBundle\Entity\B2BRequete:private] => Activation Data
+    [statut:AppBundle\Entity\B2BRequete:private] => Fermé
+    [pJ1:AppBundle\Entity\B2BRequete:private] => 
+    [fichiersJointsCreation:AppBundle\Entity\B2BRequete:private] => Chrysanthemum.jpg;Koala.jpg;Penguins.jpg;Jellyfish.jpg;Jellyfish.jpg
+    [tableauFichiersJointsCreation:AppBundle\Entity\B2BRequete:private] => Array
+        (
+            [0] => Chrysanthemum.jpg
+            [1] => Koala.jpg
+            [2] => Penguins.jpg
+            [3] => Jellyfish.jpg
+            [4] => Jellyfish.jpg
+        )
+
+    [fichiersJointsTraitement:AppBundle\Entity\B2BRequete:private] => 
+    [tableauFichiersJointsTraitement:AppBundle\Entity\B2BRequete:private] => 
+    [commentairesRequete:AppBundle\Entity\B2BRequete:private] => Array
+        (
+        )
+
+    [issue:AppBundle\Entity\B2BRequete:private] => OK
+    [detailsIssue:AppBundle\Entity\B2BRequete:private] => TESTProl
+)
